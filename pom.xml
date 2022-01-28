@@ -8,15 +8,22 @@
 		<version>2.6.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.github.jazzschmidt</groupId>
-	<artifactId>apubsub</artifactId>
+	<groupId>com.github.jazzschmidt.apubsub</groupId>
+	<artifactId>apubsub-parent</artifactId>
 	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>apubsub</name>
 	<description>Simple message broker implementation</description>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+
+	<modules>
+		<module>server</module>
+		<module>client</module>
+	</modules>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
