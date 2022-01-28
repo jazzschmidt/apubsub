@@ -10,6 +10,7 @@
 	</parent>
 	<groupId>com.github.jazzschmidt</groupId>
 	<artifactId>apubsub</artifactId>
+	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>apubsub</name>
 	<description>Simple message broker implementation</description>
