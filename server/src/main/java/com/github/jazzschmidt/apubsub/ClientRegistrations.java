@@ -1,5 +1,6 @@
 package com.github.jazzschmidt.apubsub;
 
+import com.github.jazzschmidt.apubsub.messages.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
@@ -27,11 +28,7 @@ public class ClientRegistrations {
 
     public void registerClient(String stompSessionId, String clientName) {
         clientIds.put(stompSessionId, clientName);
-
-        String topic = configuration.getBroadcastTopic();
-        String message = String.format(MESSAGE_REGISTER, clientName);
-
-        messagingTemplate.convertAndSend(topic, message);
+        broadcastNotification(String.format(MESSAGE_REGISTER, clientName));
     }
 
     public void dropClient(String stompSessionId) throws NoSuchClientException {
@@ -40,11 +37,14 @@ public class ClientRegistrations {
         }
 
         String clientName = clientIds.remove(stompSessionId);
+        broadcastNotification(String.format(MESSAGE_DROP, clientName));
+    }
 
+    private void broadcastNotification(String message) {
         String topic = configuration.getBroadcastTopic();
-        String message = String.format(MESSAGE_DROP, clientName);
+        Notification notification = new Notification(message);
 
-        messagingTemplate.convertAndSend(topic, message);
+        messagingTemplate.convertAndSend(topic, notification);
     }
 
     public boolean isClientRegistered(String stompSessionId) {

@@ -1,7 +1,7 @@
 package com.github.jazzschmidt.apubsub;
 
-import com.github.jazzschmidt.apubsub.Messages.Broadcast;
-import com.github.jazzschmidt.apubsub.Messages.Registration;
+import com.github.jazzschmidt.apubsub.messages.Broadcast;
+import com.github.jazzschmidt.apubsub.messages.Registration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -23,7 +23,7 @@ public class MessageController {
     }
 
     @MessageMapping("#{@messaging.topics.broadcast}")
-    public Broadcast greetClient(Message<Broadcast> message) {
+    public Broadcast broadcast(Message<Broadcast> message) {
         String sessionId = getStompSessionId(message);
         String clientId = registrations.getClientName(sessionId);
 
