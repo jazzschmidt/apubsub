@@ -1,5 +1,6 @@
 package com.github.jazzschmidt.apubsub
 
+import com.github.jazzschmidt.apubsub.messages.Notification
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -27,7 +28,7 @@ class ClientRegistrationsSpec extends ApplicationSpec {
 
         then:
         1 * messagingTemplate.convertAndSend("/topic/$broadcast",
-                { String payload -> payload.contains("$clientName has entered") })
+                { Notification n -> n.message.contains("$clientName has entered") })
 
         and:
         initialClients == 0
@@ -48,7 +49,7 @@ class ClientRegistrationsSpec extends ApplicationSpec {
 
         then:
         1 * messagingTemplate.convertAndSend("/topic/$broadcast",
-                { String payload -> payload.contains("$clientName has left") })
+                { Notification n -> n.message.contains("$clientName has left") })
 
         and:
         initialClients == 1
