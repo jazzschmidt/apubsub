@@ -3,18 +3,21 @@
 var stompClient = null;
 
 function setConnected(connected) {
-    $("#connect").prop("disabled", connected);
-    $("#disconnect").prop("disabled", !connected);
     if (connected) {
         $("#conversation").show();
+        $("#connect-container").hide();
+        $("#message-container").show();
     } else {
         $("#conversation").hide();
+        $("#connect-container").show();
+        $("#message-container").hide();
     }
+
     $("#greetings").html("");
 }
 
 function connect() {
-    var socket = new SockJS('/stomp');
+    var socket = new SockJS($("#server").val());
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
@@ -35,11 +38,11 @@ function disconnect() {
 }
 
 function register() {
-    stompClient.send("/app/register", {}, JSON.stringify({'clientName': 'server-ui'}))
+    stompClient.send("/app/register", {}, JSON.stringify({'clientName': $("#name").val()}))
 }
 
 function sendMessage() {
-    stompClient.send("/app/messages", {}, JSON.stringify({'message': $("#name").val()}));
+    stompClient.send("/app/messages", {}, JSON.stringify({'message': $("#message").val()}));
 }
 
 function showMessage(message) {
@@ -68,3 +71,4 @@ $(function () {
         sendMessage();
     });
 });
+

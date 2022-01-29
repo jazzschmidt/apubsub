@@ -91,6 +91,19 @@ public class MessagingConfiguration {
         this.topics = topics;
     }
 
+    @Override
+    public String toString() {
+        String format = """
+                {
+                    stompEndpoint: %s
+                    registration: %s
+                    broadcast: %s
+                }""";
+        
+        return String.format(format,
+                stompEndpoint, getRegistrationTopic(), getBroadcastTopic());
+    }
+
     public static class TopicConfiguration {
         @NotBlank
         private String registration;

@@ -9,6 +9,8 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+import java.util.logging.Logger;
+
 /**
  * Intensively influenced by https://spring.io/guides/gs/messaging-stomp-websocket/ (Getting Started | Using WebSocket
  * to build an interactive web application)
@@ -20,10 +22,17 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
     private final ChannelInterceptor greetingChannelInterceptor;
     private final MessagingConfiguration messagingConfiguration;
 
+    private final Logger log;
+
     @Autowired
     public WebSocketConfiguration(ChannelInterceptor greetingChannelInterceptor, MessagingConfiguration configuration) {
         this.greetingChannelInterceptor = greetingChannelInterceptor;
         this.messagingConfiguration = configuration;
+
+        {
+            log = Logger.getLogger(getClass().getName());
+            log.info("Initialized messaging with the following properties: \n" + messagingConfiguration.toString());
+        }
     }
 
     @Override
