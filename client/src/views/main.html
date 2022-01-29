@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>NW.js-example | main</title>
+    <!-- https://stackoverflow.com/questions/22792254/how-do-i-load-bootstrap-using-npm -->
+    <!-- Bootstrap CSS -->
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../styles/common.css" rel="stylesheet">
+    <script src="../node_modules/sockjs-client/dist/sockjs.min.js"></script>
+    <script src="../node_modules/stomp-websocket/lib/stomp.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <h1 style="text-align: center">apubsub</h1>
+</div>
+<div class="container" id="main-content">
+    <div class="row" id="connect-container">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="server">Server url</label>
+                <input class="form-control" id="server" placeholder="http://localhost:8080/stomp" type="text">
+            </div>
+            <p/>
+            <div class="form-group">
+                <label for="name">Client name</label>
+                <input class="form-control" id="name" placeholder="Your name here..." type="text">
+            </div>
+            <p/>
+            <div class="row align-content-center">
+                <button class="btn btn-primary" id="connect" type="submit">Connect</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="row" id="message-container" style="display: none">
+        <div class="col-md-12">
+            <table class="table table-striped" id="conversation">
+                <thead>
+                <tr>
+                    <th>Messages</th>
+                </tr>
+                </thead>
+                <tbody id="greetings">
+                </tbody>
+            </table>
+        </div>
+        <p/>
+        <input class="form-control" id="message" placeholder="Your message..." type="text">
+        <button class="btn btn-success" id="send" type="submit">Send</button>
+        <p/>
+        <button class="btn btn-danger" id="disconnect" type="submit">Disconnect</button>
+    </div>
+
+</div>
+<!-- https://stackoverflow.com/questions/22792254/how-do-i-load-bootstrap-using-npm -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+<script src="../node_modules/jquery/dist/jquery.slim.min.js"></script>
+<script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="../app/main.js"></script>
+</body>
+</html>

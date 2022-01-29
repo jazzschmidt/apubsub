@@ -1,0 +1,12 @@
+{
+  "name": "apubsub-client",
+  "version": "1.0.0",
+  "devDependencies": {
+    "nw": "^0.18.8-sdk",
+    "nw-builder": "^3.5.7"
+  },
+  "scripts": {
+    "dev": "nw src/",
+    "prod": "nwbuild --platforms win64,osx64,linux64 --buildDir dist/ src/"
+  }
+}
