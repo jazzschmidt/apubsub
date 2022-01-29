@@ -1,0 +1,63 @@
+#!/bin/bash -e
+
+DOCKERFILE="Dockerfile"
+
+if [ "${1}" = "--arm" ]; then
+  DOCKERFILE="Dockerfile-ARM"
+elif [ "${1}" != "" ]; then
+  >&2 echo "Unknown option: ${1}"
+  exit 1
+fi
+
+# Build server with maven
+# =======================
+echo -n "Building Server module... "
+
+if ./mvnw package > server-build.log 2>&1; then
+  rm server-build.log
+  echo "done!"
+else
+  >&2 echo "failed!"
+  >&2 echo "See server-build.log for further details"
+  exit 1
+fi
+
+# Build Docker image
+# ==================
+echo -n "Building Docker image... "
+
+if docker build ./server -f "./server/${DOCKERFILE}" -t apubsub-server > docker-build.log 2>&1; then
+  rm docker-build.log
+  echo "done!"
+else
+  >&2 echo "failed!"
+  >&2 echo "See docker-build.log for further details"
+  exit 1
+fi
+
+# Build Client module
+echo -n "Building Client module... "
+(
+  cd ./client
+  if npm run prod > client-build.log 2>&1; then
+    rm client-build.log
+    echo "done!"
+  else
+    >&2 echo "failed!"
+    >&2 echo "See client-build.log for further details"
+    exit 1
+  fi
+)
+
+# Output a summary
+echo ""
+echo "
+================================ SUMMARY ================================
+    -- TYPE --     |                      -- DEST --
+=========================================================================
+Server jar         | server/target/server-0.0.1-SNAPSHOT.jar
+Docker Image       | apubsub-server:latest
+Client exe (win64) | client/dist/apubsub-client/win64/apubsub-client.exe
+Client app (osx)   | client/dist/apubsub-client/osx64/apubsub-client.app
+Client bin (linux) | client/dist/apubsub-client/linux64/apubsub-client
+"
