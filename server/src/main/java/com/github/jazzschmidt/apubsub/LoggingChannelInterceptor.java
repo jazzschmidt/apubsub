@@ -41,10 +41,12 @@ public class LoggingChannelInterceptor implements ExecutorChannelInterceptor {
         // Produces a broadcast message for registered clients
         String sessionId = getSessionId(message);
 
+        if (!clientRegistrations.isClientRegistered(sessionId)) {
+            return;
+        }
+
         try {
-            if (clientRegistrations.isClientRegistered(sessionId)) {
-                clientRegistrations.dropClient(sessionId);
-            }
+            clientRegistrations.dropClient(sessionId);
         } catch (NoSuchClientException e) {
             // Virtually impossible exception
             e.printStackTrace();
