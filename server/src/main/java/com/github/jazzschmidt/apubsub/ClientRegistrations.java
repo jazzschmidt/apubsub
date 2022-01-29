@@ -37,6 +37,10 @@ public class ClientRegistrations {
     public void dropClient(String stompSessionId) {
         String clientName = clientIds.remove(stompSessionId);
 
+        if (clientName == null) {
+            return; // Simply abort when no client was associated
+        }
+
         String topic = configuration.getBroadcastTopic();
         String message = String.format(MESSAGE_DROP, clientName);
 

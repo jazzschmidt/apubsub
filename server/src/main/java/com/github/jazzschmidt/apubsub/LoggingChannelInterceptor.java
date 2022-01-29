@@ -1,5 +1,7 @@
 package com.github.jazzschmidt.apubsub;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.simp.stomp.StompCommand;
@@ -16,6 +18,7 @@ import static org.springframework.messaging.simp.stomp.StompCommand.DISCONNECT;
 public class LoggingChannelInterceptor implements ExecutorChannelInterceptor {
 
     private final Logger log;
+    private ClientRegistrations clientRegistrations;
 
     {
         log = Logger.getLogger(getClass().getName());
@@ -28,6 +31,8 @@ public class LoggingChannelInterceptor implements ExecutorChannelInterceptor {
             log.info("A new client is connecting");
         } else if (isClientDisconnecting(message)) {
             log.info("A client is disconnecting");
+            // Produce a broadcast message for registered clients
+            clientRegistrations.dropClient(getSessionId(message));
         }
 
         return message;
@@ -44,5 +49,16 @@ public class LoggingChannelInterceptor implements ExecutorChannelInterceptor {
     private StompCommand getStompCommand(Message<?> message) {
         StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
         return accessor.getCommand();
+    }
+
+    private String getSessionId(Message<?> message) {
+        StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
+        return accessor.getSessionId();
+    }
+
+    @Autowired
+    @Lazy
+    public void setClientRegistrations(ClientRegistrations clientRegistrations) {
+        this.clientRegistrations = clientRegistrations;
     }
 }
