@@ -6,8 +6,8 @@ The following resources were consulted:
 - [Core Features (docs.spring.io)](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config)
 - [STOMP Support (docs.spring.io)](https://docs.spring.io/spring-integration/reference/html/stomp.html)
 - [Web on Servlet Stack (docs.spring.io)](https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#websocket-stomp-client)
-- https://github.com/nwjs/nw.js
-- https://nwjs.io/
-- https://docs.nwjs.io/en/latest/
-- https://www.sitepoint.com/cross-platform-desktop-app-nw-js/
-- https://morioh.com/p/6892d80eebdf
+- [nws/nw.js (github.com)](https://github.com/nwjs/nw.js)
+- [NW.js (nwjs.io)](https://nwjs.io/)
+- [NW.js Documentation (docs.nwjs.io)](https://docs.nwjs.io/en/latest/)
+- [Building a Cross-platform Desktop App with NW.js (www.sitepoint.com)](https://www.sitepoint.com/cross-platform-desktop-app-nw-js/)
+- [How to create JavaScript desktop programs with NW.js (morioh.com)](https://morioh.com/p/6892d80eebdf)
