@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Configuration
+@Configuration(value = "messaging")
 @ConfigurationProperties(prefix = "messaging")
 @Validated
 public class MessagingConfiguration {

@@ -17,9 +17,10 @@ function connect() {
     var socket = new SockJS('/stomp');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
+        register();
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
+        stompClient.subscribe('/topic/messages', function (greeting) {
             showGreeting(greeting.body);
         });
     });
@@ -33,8 +34,12 @@ function disconnect() {
     console.log("Disconnected");
 }
 
+function register() {
+    stompClient.send("/app/register", {}, JSON.stringify({'clientName': 'abcdefg'}))
+}
+
 function sendName() {
-    stompClient.send("/app/hello", {}, JSON.stringify({'clientId': $("#name").val()}));
+    stompClient.send("/app/messages", {}, JSON.stringify({'message': $("#name").val()}));
 }
 
 function showGreeting(message) {

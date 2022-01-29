@@ -1,7 +1,11 @@
 package com.github.jazzschmidt.apubsub;
 
+import com.github.jazzschmidt.apubsub.Messages.Broadcast;
+import com.github.jazzschmidt.apubsub.Messages.Registration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -11,10 +15,33 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class MessageController {
 
-    @MessageMapping("/hello")
-    @SendTo("/topic/greetings")
-    public String registerClient(Message message) {
-        return String.format("Hello %s", message.getClientId());
+    private final ClientRegistrations registrations;
+
+    @Autowired
+    public MessageController(ClientRegistrations registrations) {
+        this.registrations = registrations;
     }
 
+    @MessageMapping("#{@messaging.topics.broadcast}")
+    public Broadcast greetClient(Message<Broadcast> message) {
+        String sessionId = getStompSessionId(message);
+        String clientId = registrations.getClientName(sessionId);
+
+        // Associate client name with the broadcast message
+        Broadcast broadcast = message.getPayload();
+        broadcast.clientName = clientId;
+
+        return broadcast;
+    }
+
+    @MessageMapping("#{@messaging.topics.registration}")
+    public void registerClient(Message<Registration> message) {
+        String clientName = message.getPayload().clientName;
+        registrations.registerClient(getStompSessionId(message), clientName);
+    }
+
+    private String getStompSessionId(Message<?> message) {
+        StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
+        return accessor.getSessionId();
+    }
 }
