@@ -59,6 +59,14 @@ public class MessagingConfiguration {
         this.topicPrefix = topicPrefix;
     }
 
+    public String getRegistrationTopic() {
+        return topicPrefix + "/" + topics.registration;
+    }
+
+    public String getBroadcastTopic() {
+        return topicPrefix + "/" + topics.broadcast;
+    }
+
     public List<String> getAllowedOriginPatterns() {
         return allowedOriginPatterns;
     }
