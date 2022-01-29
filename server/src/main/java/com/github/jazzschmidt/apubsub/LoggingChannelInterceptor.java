@@ -31,11 +31,24 @@ public class LoggingChannelInterceptor implements ExecutorChannelInterceptor {
             log.info("A new client is connecting");
         } else if (isClientDisconnecting(message)) {
             log.info("A client is disconnecting");
-            // Produce a broadcast message for registered clients
-            clientRegistrations.dropClient(getSessionId(message));
+            dropRegisteredClient(message);
         }
 
         return message;
+    }
+
+    private void dropRegisteredClient(Message<?> message) {
+        // Produces a broadcast message for registered clients
+        String sessionId = getSessionId(message);
+
+        try {
+            if (clientRegistrations.isClientRegistered(sessionId)) {
+                clientRegistrations.dropClient(sessionId);
+            }
+        } catch (NoSuchClientException e) {
+            // Virtually impossible exception
+            e.printStackTrace();
+        }
     }
 
     private boolean isClientConnecting(Message<?> message) {

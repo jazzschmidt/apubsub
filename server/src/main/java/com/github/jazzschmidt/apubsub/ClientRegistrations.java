@@ -34,17 +34,21 @@ public class ClientRegistrations {
         messagingTemplate.convertAndSend(topic, message);
     }
 
-    public void dropClient(String stompSessionId) {
-        String clientName = clientIds.remove(stompSessionId);
-
-        if (clientName == null) {
-            return; // Simply abort when no client was associated
+    public void dropClient(String stompSessionId) throws NoSuchClientException {
+        if (!isClientRegistered(stompSessionId)) {
+            throw new NoSuchClientException(stompSessionId);
         }
+
+        String clientName = clientIds.remove(stompSessionId);
 
         String topic = configuration.getBroadcastTopic();
         String message = String.format(MESSAGE_DROP, clientName);
 
         messagingTemplate.convertAndSend(topic, message);
+    }
+
+    public boolean isClientRegistered(String stompSessionId) {
+        return clientIds.containsKey(stompSessionId);
     }
 
     public String getClientName(String stompSessionId) {
