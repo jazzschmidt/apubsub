@@ -19,7 +19,7 @@ consumes
 [StompClientEvents](/apubsub/apidocs/com/github/jazzschmidt/apubsub/events/StompClientEvent.html) of interest and
 publishes an event, when a client connects, disconnects or registers itself.
 
-The [ClientEventListener](/apubsub/apidocs/com/github/jazzschmidt/apubsub/ClientEventListener.html) then instruct the
+The [ClientEventListener](/apubsub/apidocs/com/github/jazzschmidt/apubsub/ClientEventListener.html) then instructs the
 [NotificationService](/apubsub/apidocs/com/github/jazzschmidt/apubsub/NotificationService.html) for example to announce
 newly connected clients and those who just left.
 
@@ -47,7 +47,7 @@ resource hungry, which was a good fit for this project.
 
 Therefore, the client was simply transferred with little effort and there was no need to reinvent the wheel.
 
-?> Sadly, the UI on both the server rendered client and the client app won't win any prizes for sure.
+?> :clown_face: Sadly, the UI on both the server rendered client and the local client app won't win any prizes for sure.
 
 ## Spock Testing Framework
 
