@@ -15,7 +15,7 @@ class ApplicationSpec extends Specification {
     String broadcast
 
     def 'context loads'() {
-        expect:
+        expect: 'the test configuration is properly loaded'
         registration == 'hello'
         broadcast == 'world'
     }

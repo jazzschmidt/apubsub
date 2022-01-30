@@ -57,7 +57,6 @@ every sent broadcast message.
 - `/app/register`: registering the client
 - `/app/broadcast`: sending a broadcast message
 - `/topic/broadcast`:  subscription of broadcast messages
-- `/topic/register`: subscription of registrations
 
 ### 1. Starting the server locally on standard http port
 

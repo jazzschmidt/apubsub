@@ -3,6 +3,7 @@ package com.github.jazzschmidt.apubsub;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.cors.CorsConfiguration;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -15,16 +16,26 @@ import java.util.List;
 @Validated
 public class MessagingConfiguration {
 
+    /**
+     * Configuration of both the registration and broadcast topic names
+     */
     @Valid
     @NotNull(message = "You must declare topic names")
     private TopicConfiguration topics;
 
     private String stompEndpoint, appPrefix, topicPrefix;
+
+    /**
+     * Supports flexible patterns for specifying the origins for which cross-origin requests are allowed from a browser.
+     * Please, refer to {@link CorsConfiguration#setAllowedOriginPatterns(List)} for format details and other
+     * considerations.
+     */
     private List<String> allowedOriginPatterns;
 
     @Min(1_000L)
     private long disconnectDelay;
 
+    // Default values
     {
         stompEndpoint = "/stomp";
         appPrefix = "/app";
@@ -59,18 +70,38 @@ public class MessagingConfiguration {
         this.topicPrefix = topicPrefix;
     }
 
+    /**
+     * Returns the whole registration topic path
+     *
+     * @return topic path
+     */
     public String getRegistrationTopic() {
         return topicPrefix + "/" + topics.registration;
     }
 
+    /**
+     * Returns the whole broadcast topic path
+     *
+     * @return topic path
+     */
     public String getBroadcastTopic() {
         return topicPrefix + "/" + topics.broadcast;
     }
 
+    /**
+     * See {@link #allowedOriginPatterns}
+     *
+     * @return allowed origin patterns
+     */
     public List<String> getAllowedOriginPatterns() {
         return allowedOriginPatterns;
     }
 
+    /**
+     * See {@link #allowedOriginPatterns}
+     *
+     * @param allowedOriginPatterns allowed origin patterns
+     */
     public void setAllowedOriginPatterns(List<String> allowedOriginPatterns) {
         this.allowedOriginPatterns = allowedOriginPatterns;
     }
@@ -83,30 +114,48 @@ public class MessagingConfiguration {
         this.disconnectDelay = disconnectDelay;
     }
 
+    /**
+     * See {@link #topics}
+     *
+     * @return Topic configuration
+     */
     public TopicConfiguration getTopics() {
         return topics;
     }
 
+
+    /**
+     * See {@link #topics}
+     *
+     * @param topics Topic configuration
+     */
     public void setTopics(TopicConfiguration topics) {
         this.topics = topics;
     }
 
     @Override
     public String toString() {
+        // Returns the most important settings
         String format = """
                 {
                     stompEndpoint: %s
                     registration: %s
                     broadcast: %s
                 }""";
-        
-        return String.format(format,
-                stompEndpoint, getRegistrationTopic(), getBroadcastTopic());
+
+        return String.format(format, stompEndpoint, getRegistrationTopic(), getBroadcastTopic());
     }
 
     public static class TopicConfiguration {
+        /**
+         * Topic name for registrations
+         */
         @NotBlank
         private String registration;
+
+        /**
+         * Topic name for broadcast messages
+         */
         @NotBlank
         private String broadcast;
 

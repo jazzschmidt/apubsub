@@ -1,3 +1,4 @@
+// Influenced by https://spring.io/guides/gs/messaging-stomp-websocket/
 package com.github.jazzschmidt.apubsub;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,24 +13,24 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 import java.util.logging.Logger;
 
 /**
- * Intensively influenced by https://spring.io/guides/gs/messaging-stomp-websocket/ (Getting Started | Using WebSocket
- * to build an interactive web application)
+ * Configures STOMP, WebSocket support and logs the most important settings upon instantiation.
  */
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
 
-    private final ChannelInterceptor greetingChannelInterceptor;
+    private final ChannelInterceptor loggingChannelInterceptor;
     private final MessagingConfiguration messagingConfiguration;
 
     private final Logger log;
 
     @Autowired
-    public WebSocketConfiguration(ChannelInterceptor greetingChannelInterceptor, MessagingConfiguration configuration) {
-        this.greetingChannelInterceptor = greetingChannelInterceptor;
+    public WebSocketConfiguration(ChannelInterceptor loggingChannelInterceptor, MessagingConfiguration configuration) {
+        this.loggingChannelInterceptor = loggingChannelInterceptor;
         this.messagingConfiguration = configuration;
 
         {
+            // Partially output the messaging configuration
             log = Logger.getLogger(getClass().getName());
             log.info("Initialized messaging with the following properties: \n" + messagingConfiguration.toString());
         }
@@ -51,7 +52,8 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
 
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
-        registration.interceptors(greetingChannelInterceptor);
+        // Logs new connects and disconnects to stdout
+        registration.interceptors(loggingChannelInterceptor);
     }
 
 }

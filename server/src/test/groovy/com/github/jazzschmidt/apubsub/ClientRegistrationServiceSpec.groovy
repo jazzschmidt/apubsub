@@ -7,10 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.messaging.simp.SimpMessagingTemplate
 
 @SpringBootTest
-class ClientRegistrationsSpec extends ApplicationSpec {
+class ClientRegistrationServiceSpec extends ApplicationSpec {
 
     @Autowired
-    ClientRegistrations registrations
+    ClientRegistrationService registrations
 
     @SpringBean
     SimpMessagingTemplate messagingTemplate = Mock()

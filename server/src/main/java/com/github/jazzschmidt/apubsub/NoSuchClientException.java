@@ -1,19 +1,22 @@
 package com.github.jazzschmidt.apubsub;
 
+/**
+ * Indicates that no client name is associated with the given STOMP session id
+ */
 public class NoSuchClientException extends Exception {
 
-    private final String clientName;
+    private final String sessionId;
 
-    public NoSuchClientException(String clientName) {
-        this.clientName = clientName;
+    public NoSuchClientException(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     @Override
     public String getMessage() {
-        return "No client registered with session id " + clientName;
+        return "No client registered with session id " + sessionId;
     }
 
-    public String getClientName() {
-        return clientName;
+    public String getSessionId() {
+        return sessionId;
     }
 }

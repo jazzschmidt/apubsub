@@ -14,19 +14,24 @@ import java.util.logging.Logger;
 import static org.springframework.messaging.simp.stomp.StompCommand.CONNECT;
 import static org.springframework.messaging.simp.stomp.StompCommand.DISCONNECT;
 
+/**
+ * Logs connecting and disconnecting messages and drops clients from the {@link ClientRegistrationService} when a
+ * disconnect occurs.
+ */
 @Component
 public class LoggingChannelInterceptor implements ExecutorChannelInterceptor {
 
     private final Logger log;
-    private ClientRegistrations clientRegistrations;
+    private ClientRegistrationService clientRegistrations;
 
     {
         log = Logger.getLogger(getClass().getName());
     }
 
-    // https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#websocket-stomp-interceptors
+
     @Override
     public Message<?> preSend(Message<?> message, MessageChannel channel) {
+        // influenced by https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#websocket-stomp-interceptors
         if (isClientConnecting(message)) {
             log.info("A new client is connecting");
         } else if (isClientDisconnecting(message)) {
@@ -37,8 +42,12 @@ public class LoggingChannelInterceptor implements ExecutorChannelInterceptor {
         return message;
     }
 
+    /**
+     * Removes a client name association when the client disconnects and announces thereby its leaving.
+     *
+     * @param message origin STOMP message
+     */
     private void dropRegisteredClient(Message<?> message) {
-        // Produces a broadcast message for registered clients
         String sessionId = getSessionId(message);
 
         if (!clientRegistrations.isClientRegistered(sessionId)) {
@@ -46,6 +55,7 @@ public class LoggingChannelInterceptor implements ExecutorChannelInterceptor {
         }
 
         try {
+            // Produces a broadcast message for registered leaving clients
             clientRegistrations.dropClient(sessionId);
         } catch (NoSuchClientException e) {
             // Virtually impossible exception
@@ -53,27 +63,59 @@ public class LoggingChannelInterceptor implements ExecutorChannelInterceptor {
         }
     }
 
+    /**
+     * Determines whether a client is currently trying to connect with the given message.
+     *
+     * @param message origin STOMP message
+     * @return true if connect command is present in STOMP headers
+     */
     private boolean isClientConnecting(Message<?> message) {
         return CONNECT == getStompCommand(message);
     }
 
+    /**
+     * Determines whether a client is currently trying to disconnect with the given message.
+     *
+     * @param message origin STOMP message
+     * @return true if disconnect command is present in STOMP headers
+     */
     private boolean isClientDisconnecting(Message<?> message) {
         return DISCONNECT == getStompCommand(message);
     }
 
+    /**
+     * Returns the STOMP command from the message headers.
+     *
+     * @param message origin STOMP message
+     * @return STOMP command type
+     */
     private StompCommand getStompCommand(Message<?> message) {
         StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
         return accessor.getCommand();
     }
 
+    /**
+     * Returns the STOMP session id from the message headers.
+     *
+     * @param message origin STOMP message
+     * @return unique STOMP session id
+     */
     private String getSessionId(Message<?> message) {
         StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
         return accessor.getSessionId();
     }
 
+    /**
+     * Injects the {@link ClientRegistrationService}.
+     * <p>
+     * Note: must be called lazy, since this Interceptor and the {@link MessagingConfiguration} would otherwise infer a
+     * cyclic dependency.
+     *
+     * @param clientRegistrations Client Registration Service
+     */
     @Autowired
     @Lazy
-    public void setClientRegistrations(ClientRegistrations clientRegistrations) {
+    public void setClientRegistrations(ClientRegistrationService clientRegistrations) {
         this.clientRegistrations = clientRegistrations;
     }
 }
