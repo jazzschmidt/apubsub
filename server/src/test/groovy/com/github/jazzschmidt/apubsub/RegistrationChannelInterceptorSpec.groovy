@@ -1,14 +1,11 @@
 package com.github.jazzschmidt.apubsub
 
+import com.github.jazzschmidt.apubsub.extra.MessageBuilder
 import org.springframework.messaging.Message
 import org.springframework.messaging.MessageChannel
 import org.springframework.messaging.MessagingException
-import org.springframework.messaging.simp.stomp.StompCommand
 import org.springframework.messaging.support.ChannelInterceptor
-import org.springframework.messaging.support.GenericMessage
 import spock.lang.Specification
-
-import static org.springframework.messaging.simp.stomp.StompCommand.SUBSCRIBE
 
 class RegistrationChannelInterceptorSpec extends Specification {
 
@@ -42,16 +39,6 @@ class RegistrationChannelInterceptorSpec extends Specification {
         then:
         1 * registrationService.isClientRegistered(sessionId) >> true
         noExceptionThrown()
-    }
-
-    class MessageBuilder {
-        static GenericMessage<?> subscribe(String sessionId) {
-            prototype(SUBSCRIBE, sessionId)
-        }
-
-        static GenericMessage<?> prototype(StompCommand command, String sessionId, Map<String, Object> headers = [:]) {
-            new GenericMessage<>([], [stompCommand: command, simpSessionId: sessionId] + headers)
-        }
     }
 
 }
