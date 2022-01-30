@@ -9,7 +9,7 @@
   <!--  <link href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" rel="stylesheet">-->
   <link href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css" rel="stylesheet">
   <style>
-    a[href^=\/apidocs] {
+    a[href^=\/apidocs], a[href^=\/apubsub\/apidocs] {
       font-weight: bold;
       text-decoration: none;
       background-color: #fcefa1;
@@ -27,7 +27,7 @@
       transition: background-color 0.4s;
     }
 
-    a[href^=\/apidocs]:hover {
+    a[href^=\/apidocs]:hover, a[href^=\/apubsub\/apidocs]:hover {
       background-color: #FCF8DE;
       text-decoration: none;
     }
@@ -46,7 +46,6 @@
     loadFooter: true,
 
     auto2top: true,
-    relativePath: true,
 
     subMaxLevel: 3,
 
@@ -56,7 +55,7 @@
       noData: 'No results!',
     },
 
-    noCompileLinks: ['/apidocs/.*']
+    noCompileLinks: ['/apidocs/.*', '/apubsub/apidocs/.*']
   }
 </script>
 <!-- Docsify v4 -->

@@ -14,25 +14,26 @@ This diagram shows the simplified process:
 ## Event Publishing
 
 In order to decouple the components of the system, an event-driven architecture was chosen. Thereby a central Event
-Listener, namely the [ClientEventListener](/apidocs/com/github/jazzschmidt/apubsub/ClientEventListener.html), consumes
-[StompClientEvents](/apidocs/com/github/jazzschmidt/apubsub/events/StompClientEvent.html) of interest and publishes an
-event, when a client connects, disconnects or registers itself.
+Listener, namely the [ClientEventListener](/apubsub/apidocs/com/github/jazzschmidt/apubsub/ClientEventListener.html),
+consumes
+[StompClientEvents](/apubsub/apidocs/com/github/jazzschmidt/apubsub/events/StompClientEvent.html) of interest and
+publishes an event, when a client connects, disconnects or registers itself.
 
-The [ClientEventListener](/apidocs/com/github/jazzschmidt/apubsub/ClientEventListener.html) then instruct the
-[NotificationService](/apidocs/com/github/jazzschmidt/apubsub/NotificationService.html) for example to announce newly
-connected clients and those who just left.
+The [ClientEventListener](/apubsub/apidocs/com/github/jazzschmidt/apubsub/ClientEventListener.html) then instruct the
+[NotificationService](/apubsub/apidocs/com/github/jazzschmidt/apubsub/NotificationService.html) for example to announce
+newly connected clients and those who just left.
 
 ## Channel Interceptors
 
 Channel Interceptors monitor the STOMP channels and can react to, manipulate or drop the incoming messages.
 
 The events previously mentioned are partly being raised by
-the [ConnectionEventPublisher](/apidocs/com/github/jazzschmidt/apubsub/interceptor/ConnectionEventPublisher.html)
+the [ConnectionEventPublisher](/apubsub/apidocs/com/github/jazzschmidt/apubsub/interceptor/ConnectionEventPublisher.html)
 Interceptor, that transforms `CONNECT` and `DISCONNECT` messages from the STOMP protocol.
 
 Apart from that publishing Interceptor, there is also
-the [UnregisteredClientsGuard](/apidocs/com/github/jazzschmidt/apubsub/interceptor/UnregisteredClientsGuard.html) that
-catches `SUBSCRIBE` messages and throws an exception for clients that are not registered yet and thus lead to those
+the [UnregisteredClientsGuard](/apubsub/apidocs/com/github/jazzschmidt/apubsub/interceptor/UnregisteredClientsGuard.html)
+that catches `SUBSCRIBE` messages and throws an exception for clients that are not registered yet and thus lead to those
 clients being disconnected, which is the technical foundation of the client registration workflow.
 
 ## NW.js Client App
