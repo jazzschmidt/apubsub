@@ -85,7 +85,7 @@ $ docker run --rm -p 80:8080 apubsub-server # bind 8080 to standard http port 80
 
 Enter the STOMP endpoint and connect:
 
-![Configuring the Client](https://raw.githubusercontent.com/jazzschmidt/apubsub/main/assets/client-connect.png)
+![Configuring the Client](../assets/client-connect.png)
 
 ### Sending Messages
 
@@ -94,5 +94,5 @@ Now you can send messages to all connected clients.
 ?> The client application is limited to run in a single instance. You can easily bypass this issue for testing by using
 the Web UI, that is exposed on the server.
 
-![Sending Messages](https://raw.githubusercontent.com/jazzschmidt/apubsub/main/assets/client-chat.png)
+![Sending Messages](../assets/client-chat.png)
 
