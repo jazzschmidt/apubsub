@@ -1,5 +1,6 @@
 package com.github.jazzschmidt.apubsub;
 
+import com.github.jazzschmidt.apubsub.config.MessagingConfiguration;
 import com.github.jazzschmidt.apubsub.messages.Notification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;

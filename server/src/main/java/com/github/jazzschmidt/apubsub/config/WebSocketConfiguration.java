@@ -1,5 +1,5 @@
 // Influenced by https://spring.io/guides/gs/messaging-stomp-websocket/
-package com.github.jazzschmidt.apubsub;
+package com.github.jazzschmidt.apubsub.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

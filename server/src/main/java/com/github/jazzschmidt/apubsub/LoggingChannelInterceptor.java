@@ -1,5 +1,6 @@
 package com.github.jazzschmidt.apubsub;
 
+import com.github.jazzschmidt.apubsub.config.MessagingConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.messaging.Message;
