@@ -864,7 +864,7 @@ main a[href*="://"]:focus::after {
  * borderless:
  *      No borders, vertical margins, styled caption.
  *      This style is provided for use with existing doc comments.
- *      In general, borderless tables should not be used for layout purposes.
+ *      In getting-started, borderless tables should not be used for layout purposes.
  *
  * plain:
  *      Plain borders around table and cells, vertical margins, styled caption.

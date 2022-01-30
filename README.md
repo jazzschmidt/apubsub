@@ -11,8 +11,9 @@ client can be accessed over http.
 The client is built using [NW.js](https://nwjs.io/), which seems to be a more efficient alternative
 to [Electron](https://www.electronjs.org/).
 
-## Reference Docs
+## [Reference Docs](https://jazzschmidt.github.io/apubsub)
 
-- [Build](https://jazzschmidt.github.io/apubsub/#/?id=build)
-- [Usage](https://jazzschmidt.github.io/apubsub/#/?id=usage)
-- [Caveats](https://jazzschmidt.github.io/apubsub/#/?id=caveats)
+- [Getting Started](https://jazzschmidt.github.io/apubsub/#/getting-started/index)
+    - [Build](https://jazzschmidt.github.io/apubsub/#/getting-started/index?id=build)
+    - [Usage](https://jazzschmidt.github.io/apubsub/#/getting-started/index?id=usage)
+- [Caveats](http://localhost:3000/#/caveats/caveats)

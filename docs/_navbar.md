@@ -1,2 +1,5 @@
 * [Start](/)
 * [**Javadoc** :book:](https://jazzschmidt.github.io/apubsub/apidocs/)
+* [GitHub](https://github.com/jazzschmidt/apubsub)
+    * [Issues](https://github.com/jazzschmidt/apubsub/issues)
+    * [Raise an Issue](https://github.com/jazzschmidt/apubsub/issues/new)
