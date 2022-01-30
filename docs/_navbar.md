@@ -1,2 +1,2 @@
 * [Start](/)
-* [**Javadoc** :book:](/apidocs/index.html)
+* [**Javadoc** :book:](https://jazzschmidt.github.io/apubsub/apidocs/)
