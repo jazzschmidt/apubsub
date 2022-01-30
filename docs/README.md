@@ -94,13 +94,13 @@ $ docker run --rm -p 80:8080 apubsub-server
 
 Enter the STOMP endpoint and connect:
 
-![Configuring the Client](assets/client-connect.png)
+![Configuring the Client](https://raw.githubusercontent.com/jazzschmidt/apubsub/main/assets/client-connect.png)
 
 ### 3. Sending Messages
 
 Now you can send messages to all connected clients.
 
-![Sending Messages](assets/client-chat.png)
+![Sending Messages](https://raw.githubusercontent.com/jazzschmidt/apubsub/main/assets/client-chat.png)
 
 ## Caveats
 
@@ -116,3 +116,12 @@ Multiple instances of the client aren't supported, so you need to use the server
 
 The server rendered client UI has a fixed name: `server-ui`. Using multiple windows or tabs of that UI will work, but
 messages cannot be specifically distinguished.
+
+<div style="text-align: center;">
+
+Made with :heart: at [GitHub](https://github.com/jazzschmidt/git-profile)
+
+<small>Copyright © 2022 by Carsten Schmidt | Licensed
+under [MIT License](https://github.com/jazzschmidt/apubsub/blob/master/LICENSE)</small>
+
+</div>
