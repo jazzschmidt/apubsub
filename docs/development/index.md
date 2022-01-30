@@ -56,7 +56,8 @@ _Groovy_ comes in handy, especially when dealing with tests because of both its 
 features, a coherent API - and is fun to use!
 
 Also, in Groovy you can access `protected` and  `private` members, which only leads to a compiler warning and IntelliJ
-refusing to autocomplete those specific statement.
+refusing to autocomplete those specific statement. This can drastically improve testability in unit tests, although this
+feature was not used in this project.
 
 There are quite a lot more features that simplify testing - if used with caution.
 
