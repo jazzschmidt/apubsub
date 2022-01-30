@@ -5,8 +5,9 @@
 A very basic example of a pub-sub system, where a client can broadcast messages via a central server to all connected
 clients.
 
-The server is written as a simple _Spring Boot_ web app that exposes STOMP endpoints via WebSockets. Also, a rudimentary
-client can be accessed over http.
+The server is written as a simple [Spring Boot](https://spring.io/projects/spring-boot) web app that
+exposes [STOMP](https://stomp.github.io/) endpoints via WebSockets. Also, a rudimentary client can be accessed over
+http.
 
 The client is built using [NW.js](https://nwjs.io/), which seems to be a more efficient alternative
 to [Electron](https://www.electronjs.org/).
@@ -17,7 +18,7 @@ to [Electron](https://www.electronjs.org/).
 - Registration workflow for subscription of topics
 - Over 90% test coverage of the server module
 - Simple event-driven application
-- Cross-OS compatible client app 9
+- Cross-OS compatible client app
 
 ## Tech Stack
 
