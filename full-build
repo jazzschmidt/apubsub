@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 DOCKERFILE="Dockerfile"
+VERSION="0.1.0"
 
 if [ "${1}" = "--arm" ]; then
   DOCKERFILE="Dockerfile-ARM"
@@ -26,7 +27,7 @@ fi
 # ==================
 echo -n "Building Docker image... "
 
-if docker build ./server -f "./server/${DOCKERFILE}" -t apubsub-server > docker-build.log 2>&1; then
+if docker build ./server -f "./server/${DOCKERFILE}" -t apubsub-server -t apubsub-server:"$VERSION" > docker-build.log 2>&1; then
   rm docker-build.log
   echo "done!"
 else
@@ -55,8 +56,8 @@ echo "
 ================================ SUMMARY ================================
     -- TYPE --     |                      -- DEST --
 =========================================================================
-Server jar         | server/target/server-0.0.1-SNAPSHOT.jar
-Docker Image       | apubsub-server:latest
+Server jar         | server/target/server-$VERSION.jar
+Docker Image       | apubsub-server:latest, apubsub-server:$VERSION
 Client exe (win64) | client/dist/apubsub-client/win64/apubsub-client.exe
 Client app (osx)   | client/dist/apubsub-client/osx64/apubsub-client.app
 Client bin (linux) | client/dist/apubsub-client/linux64/apubsub-client

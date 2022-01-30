@@ -1,6 +1,6 @@
 {
   "name": "apubsub-client",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "devDependencies": {
     "nw": ">=0.23.6-1",
     "nw-builder": "^3.5.7"

@@ -26,8 +26,8 @@ Building Client module... done!
 ================================ SUMMARY ================================
     -- TYPE --     |                      -- DEST --
 =========================================================================
-Server jar         | server/target/server-0.0.1-SNAPSHOT.jar
-Docker Image       | apubsub-server:latest
+Server jar         | server/target/server-0.1.0.jar
+Docker Image       | apubsub-server:latest, apubsub-server:0.1.0
 Client exe (win64) | client/dist/apubsub-client/win64/apubsub-client.exe
 Client app (osx)   | client/dist/apubsub-client/osx64/apubsub-client.app
 Client bin (linux) | client/dist/apubsub-client/linux64/apubsub-client
