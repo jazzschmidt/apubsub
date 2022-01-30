@@ -11,13 +11,18 @@ import spock.lang.Specification
 
 class UnregisteredClientsGuardSpec extends Specification {
 
+    ClientRegistrations registrationService = Mock()
+
+    ChannelInterceptor interceptor
+
+    def setup() {
+        interceptor = new UnregisteredClientsGuard(registrationService)
+    }
+
     def 'rejects subscriptions from unregistered client'() {
         given:
         def sessionId = 'abc123'
         Message<?> subscribe = MessageBuilder.subscribe(sessionId)
-
-        ClientRegistrations registrationService = Mock()
-        ChannelInterceptor interceptor = new UnregisteredClientsGuard(registrationService)
 
         when:
         interceptor.preSend(subscribe, Stub(MessageChannel))
@@ -31,9 +36,6 @@ class UnregisteredClientsGuardSpec extends Specification {
         given:
         def sessionId = 'abc123'
         Message<?> subscribe = MessageBuilder.subscribe(sessionId)
-
-        ClientRegistrations registrationService = Mock()
-        ChannelInterceptor interceptor = new UnregisteredClientsGuard(registrationService)
 
         when:
         interceptor.preSend(subscribe, Stub(MessageChannel))

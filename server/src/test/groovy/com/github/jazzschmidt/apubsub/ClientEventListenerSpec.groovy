@@ -9,7 +9,7 @@ class ClientEventListenerSpec extends Specification {
 
     ClientEventListener eventListener
 
-    NotificationService notificationService = Mock(NotificationService)
+    NotificationService notificationService = Mock()
     ClientRegistrations clientRegistrations = Mock()
 
     def setup() {

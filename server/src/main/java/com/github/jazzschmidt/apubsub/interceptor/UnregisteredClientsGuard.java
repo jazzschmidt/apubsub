@@ -13,11 +13,19 @@ import org.springframework.stereotype.Component;
 
 import static org.springframework.messaging.simp.stomp.StompCommand.SUBSCRIBE;
 
+/**
+ * Prevents clients from subscribing unto a topic and raises an disconnecting exception, unless they were registered
+ * beforehand.
+ */
 @Component
 public class UnregisteredClientsGuard implements ChannelInterceptor {
 
     private final ClientRegistrations clientRegistrations;
 
+    /**
+     * @param clientRegistrations Client registrations container
+     * @see UnregisteredClientsGuard
+     */
     @Autowired
     public UnregisteredClientsGuard(ClientRegistrations clientRegistrations) {
         this.clientRegistrations = clientRegistrations;

@@ -1,8 +1,8 @@
 package com.github.jazzschmidt.apubsub.interceptor;
 
-import com.github.jazzschmidt.apubsub.ClientRegistrations;
 import com.github.jazzschmidt.apubsub.events.ClientConnectedEvent;
 import com.github.jazzschmidt.apubsub.events.ClientDisconnectedEvent;
+import com.github.jazzschmidt.apubsub.events.StompClientEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.messaging.Message;
@@ -18,8 +18,8 @@ import static org.springframework.messaging.simp.stomp.StompCommand.CONNECT;
 import static org.springframework.messaging.simp.stomp.StompCommand.DISCONNECT;
 
 /**
- * Logs connecting and disconnecting messages and drops clients from the {@link ClientRegistrations} when a disconnect
- * occurs.
+ * Intercepts the incoming {@link MessageChannel} for connecting and disconnecting clients and logs and publishes those
+ * events as {@link StompClientEvent} on the {@link ApplicationEventPublisher}.
  */
 @Component
 public class ConnectionEventPublisher implements ChannelInterceptor {
@@ -31,6 +31,10 @@ public class ConnectionEventPublisher implements ChannelInterceptor {
         log = Logger.getLogger(getClass().getName());
     }
 
+    /**
+     * @param eventPublisher Global event publisher
+     * @see ConnectionEventPublisher
+     */
     @Autowired
     public ConnectionEventPublisher(ApplicationEventPublisher eventPublisher) {
         this.eventPublisher = eventPublisher;
@@ -43,6 +47,7 @@ public class ConnectionEventPublisher implements ChannelInterceptor {
         StompCommand command = accessor.getCommand();
         String sessionId = accessor.getSessionId();
 
+        // Publish connect and disconnect events
         if (command == CONNECT) {
             log.info("A new client is connecting");
             eventPublisher.publishEvent(new ClientConnectedEvent(this, sessionId));

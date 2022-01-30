@@ -7,6 +7,10 @@ public class UnregisteredClientException extends Exception {
 
     private final String sessionId;
 
+    /**
+     * @param sessionId STOMP session id
+     * @see UnregisteredClientException
+     */
     public UnregisteredClientException(String sessionId) {
         this.sessionId = sessionId;
     }
@@ -16,6 +20,9 @@ public class UnregisteredClientException extends Exception {
         return "No client registered with session id " + sessionId;
     }
 
+    /**
+     * @return STOMP session id
+     */
     public String getSessionId() {
         return sessionId;
     }

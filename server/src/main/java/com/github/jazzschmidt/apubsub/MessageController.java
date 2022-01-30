@@ -11,7 +11,7 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 /**
- * Handles incoming STOMP messages that were routed to the app prefix.
+ * Handles incoming STOMP messages that were routed to the app path.
  * <p>
  * More specific, it receives broadcast messages and pushes them to the broadcast topic along with a client name, if
  * that client was registered beforehand.
@@ -21,14 +21,18 @@ public class MessageController {
 
     private final ClientRegistrations registrations;
 
+    /**
+     * @param registrations Client registration container
+     * @see MessageController
+     */
     @Autowired
     public MessageController(ClientRegistrations registrations) {
         this.registrations = registrations;
     }
 
     /**
-     * Registers a client in order to associate messages from a specific client. This step is required before
-     * subscribing to the broadcast topic.
+     * Registers a client in order to associate messages from a specific client. <strong>This step is required before
+     * subscribing to the broadcast topic.</strong>
      *
      * @param message the {@link Registration} message
      */
@@ -50,10 +54,17 @@ public class MessageController {
             setSendingClientName(message);
             return message.getPayload();
         } catch (UnregisteredClientException e) {
+            // Translate internal exception
             throw new MessagingException(message, e);
         }
     }
 
+    /**
+     * Sets the client name on the {@link Broadcast} message.
+     *
+     * @param message the received message
+     * @throws UnregisteredClientException when no client name is associated with that session id
+     */
     private void setSendingClientName(Message<Broadcast> message) throws UnregisteredClientException {
         String sessionId = getStompSessionId(message);
         String clientName = registrations.getClientName(sessionId);
@@ -61,6 +72,12 @@ public class MessageController {
         message.getPayload().clientName = clientName;
     }
 
+    /**
+     * Retrieves the STOMP session id
+     *
+     * @param message the received message
+     * @return its session id
+     */
     private String getStompSessionId(Message<?> message) {
         StompHeaderAccessor accessor = StompHeaderAccessor.wrap(message);
         return accessor.getSessionId();

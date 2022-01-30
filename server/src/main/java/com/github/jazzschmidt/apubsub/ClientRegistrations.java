@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Associates client names with their STOMP session id and announces new connections and disconnects via the standard
- * messaging topic.
+ * Associates and disassociates client names with their STOMP session id and publishes respective events, so that other
+ * components can react to new connected or leaving clients.
  */
 @Component
 public class ClientRegistrations {
@@ -20,8 +20,13 @@ public class ClientRegistrations {
      * Associations of session ids and their respective client names
      */
     private final Map<String, String> clientIds = new HashMap<>();
+
     private final ApplicationEventPublisher eventPublisher;
 
+    /**
+     * @param eventPublisher Global event publisher
+     * @see ClientRegistrations
+     */
     @Autowired
     public ClientRegistrations(ApplicationEventPublisher eventPublisher) {
         this.eventPublisher = eventPublisher;
@@ -62,17 +67,23 @@ public class ClientRegistrations {
     }
 
     /**
-     * Retrieves the associated client name of the STOMP session id or a default value in case of an unregistered
-     * client.
+     * Retrieves the associated client name of the STOMP session id.
      *
      * @param stompSessionId STOMP session id
-     * @return name of the client or `unregistered`
+     * @return name of the client
+     * @throws UnregisteredClientException when no client name is associated with that session id
      */
     public String getClientName(String stompSessionId) throws UnregisteredClientException {
         validateRegistration(stompSessionId);
         return clientIds.get(stompSessionId);
     }
 
+    /**
+     * Validates that a session id has been associated with a client name.
+     *
+     * @param stompSessionId STOMP session id
+     * @throws UnregisteredClientException when no client name is associated with that session id
+     */
     private void validateRegistration(String stompSessionId) throws UnregisteredClientException {
         if (!isClientRegistered(stompSessionId)) {
             throw new UnregisteredClientException(stompSessionId);

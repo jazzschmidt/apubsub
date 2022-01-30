@@ -4,6 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.socket.config.annotation.StompWebSocketEndpointRegistration;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -29,6 +30,8 @@ public class MessagingConfiguration {
      * Supports flexible patterns for specifying the origins for which cross-origin requests are allowed from a browser.
      * Please, refer to {@link CorsConfiguration#setAllowedOriginPatterns(List)} for format details and other
      * considerations.
+     *
+     * @see StompWebSocketEndpointRegistration#setAllowedOriginPatterns(java.lang.String...)
      */
     private List<String> allowedOriginPatterns;
 
@@ -125,9 +128,8 @@ public class MessagingConfiguration {
 
 
     /**
-     * See {@link #topics}
-     *
      * @param topics Topic configuration
+     * @see #topics
      */
     public void setTopics(TopicConfiguration topics) {
         this.topics = topics;
