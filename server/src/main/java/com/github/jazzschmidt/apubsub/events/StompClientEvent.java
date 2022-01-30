@@ -1,4 +1,4 @@
-package com.github.jazzschmidt.apubsub;
+package com.github.jazzschmidt.apubsub.events;
 
 import org.springframework.context.ApplicationEvent;
 

@@ -1,5 +1,8 @@
-package com.github.jazzschmidt.apubsub;
+package com.github.jazzschmidt.apubsub.interceptor;
 
+import com.github.jazzschmidt.apubsub.ClientRegistrationService;
+import com.github.jazzschmidt.apubsub.events.ClientConnectedEvent;
+import com.github.jazzschmidt.apubsub.events.ClientDisconnectedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.messaging.Message;
@@ -19,7 +22,7 @@ import static org.springframework.messaging.simp.stomp.StompCommand.DISCONNECT;
  * disconnect occurs.
  */
 @Component
-public class ConnectionPublishingChannelInterceptor implements ExecutorChannelInterceptor {
+public class ConnectionEventPublisher implements ExecutorChannelInterceptor {
 
     private final Logger log;
     private final ApplicationEventPublisher eventPublisher;
@@ -29,7 +32,7 @@ public class ConnectionPublishingChannelInterceptor implements ExecutorChannelIn
     }
 
     @Autowired
-    public ConnectionPublishingChannelInterceptor(ApplicationEventPublisher eventPublisher) {
+    public ConnectionEventPublisher(ApplicationEventPublisher eventPublisher) {
         this.eventPublisher = eventPublisher;
     }
 

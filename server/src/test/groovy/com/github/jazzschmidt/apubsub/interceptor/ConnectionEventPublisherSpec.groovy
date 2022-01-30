@@ -1,6 +1,9 @@
-package com.github.jazzschmidt.apubsub
+package com.github.jazzschmidt.apubsub.interceptor
 
-
+import com.github.jazzschmidt.apubsub.events.ClientConnectedEvent
+import com.github.jazzschmidt.apubsub.events.ClientDisconnectedEvent
+import com.github.jazzschmidt.apubsub.events.StompClientEvent
+import com.github.jazzschmidt.apubsub.interceptor.ConnectionEventPublisher
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.messaging.MessageChannel
 import org.springframework.messaging.support.ChannelInterceptor
@@ -9,12 +12,12 @@ import spock.lang.Specification
 import static com.github.jazzschmidt.apubsub.extra.MessageBuilder.connect
 import static com.github.jazzschmidt.apubsub.extra.MessageBuilder.disconnect
 
-class ConnectionPublishingChannelInterceptorSpec extends Specification {
+class ConnectionEventPublisherSpec extends Specification {
 
     def 'publishes an event when a client connects or disconnects'() {
         given:
         ApplicationEventPublisher eventPublisher = Mock()
-        ChannelInterceptor interceptor = new ConnectionPublishingChannelInterceptor(eventPublisher)
+        ChannelInterceptor interceptor = new ConnectionEventPublisher(eventPublisher)
 
         when:
         interceptor.preSend(message, Stub(MessageChannel))

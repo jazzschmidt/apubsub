@@ -1,4 +1,4 @@
-package com.github.jazzschmidt.apubsub;
+package com.github.jazzschmidt.apubsub.events;
 
 public class ClientConnectedEvent extends StompClientEvent {
     public ClientConnectedEvent(Object source, String sessionId) {
