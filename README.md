@@ -13,6 +13,6 @@ to [Electron](https://www.electronjs.org/).
 
 ## Reference Docs
 
-- [Build](https://jazzschmidt.github.io/apubsub/#/build)
-- [Usage](https://jazzschmidt.github.io/apubsub/#/usage)
-- [Caveats](https://jazzschmidt.github.io/apubsub/#/caveats)
+- [Build](https://jazzschmidt.github.io/apubsub/#/?id=build)
+- [Usage](https://jazzschmidt.github.io/apubsub/#/?id=usage)
+- [Caveats](https://jazzschmidt.github.io/apubsub/#/?id=caveats)
