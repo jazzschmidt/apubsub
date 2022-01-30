@@ -9,6 +9,31 @@ memberSearchIndex = [{
     "l": "broadcast(Message<Broadcast>)",
     "u": "broadcast(org.springframework.messaging.Message)"
 }, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "NotificationService",
+    "l": "broadcast(Notification)",
+    "u": "broadcast(com.github.jazzschmidt.apubsub.messages.Notification)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "NotificationService",
+    "l": "broadcast(String)",
+    "u": "broadcast(java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.events",
+    "c": "ClientConnectedEvent",
+    "l": "ClientConnectedEvent(Object, String)",
+    "u": "%3Cinit%3E(java.lang.Object,java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.events",
+    "c": "ClientDisconnectedEvent",
+    "l": "ClientDisconnectedEvent(Object, String)",
+    "u": "%3Cinit%3E(java.lang.Object,java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "ClientEventListener",
+    "l": "ClientEventListener(NotificationService, ClientRegistrations)",
+    "u": "%3Cinit%3E(com.github.jazzschmidt.apubsub.NotificationService,com.github.jazzschmidt.apubsub.ClientRegistrations)"
+}, {
     "p": "com.github.jazzschmidt.apubsub.messages",
     "c": "Broadcast",
     "l": "clientName"
@@ -17,10 +42,20 @@ memberSearchIndex = [{
     "c": "Registration",
     "l": "clientName"
 }, {
+    "p": "com.github.jazzschmidt.apubsub.events",
+    "c": "ClientRegisteredEvent",
+    "l": "ClientRegisteredEvent(Object, String, String)",
+    "u": "%3Cinit%3E(java.lang.Object,java.lang.String,java.lang.String)"
+}, {
     "p": "com.github.jazzschmidt.apubsub",
-    "c": "ClientRegistrationService",
-    "l": "ClientRegistrationService(SimpMessagingTemplate, MessagingConfiguration)",
-    "u": "%3Cinit%3E(org.springframework.messaging.simp.SimpMessagingTemplate,com.github.jazzschmidt.apubsub.config.MessagingConfiguration)"
+    "c": "ClientRegistrations",
+    "l": "ClientRegistrations(ApplicationEventPublisher)",
+    "u": "%3Cinit%3E(org.springframework.context.ApplicationEventPublisher)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.events",
+    "c": "ClientUnregisteredEvent",
+    "l": "ClientUnregisteredEvent(Object, String, String)",
+    "u": "%3Cinit%3E(java.lang.Object,java.lang.String,java.lang.String)"
 }, {
     "p": "com.github.jazzschmidt.apubsub.config",
     "c": "WebSocketConfiguration",
@@ -32,10 +67,10 @@ memberSearchIndex = [{
     "l": "configureMessageBroker(MessageBrokerRegistry)",
     "u": "configureMessageBroker(org.springframework.messaging.simp.config.MessageBrokerRegistry)"
 }, {
-    "p": "com.github.jazzschmidt.apubsub",
-    "c": "ClientRegistrationService",
-    "l": "dropClient(String)",
-    "u": "dropClient(java.lang.String)"
+    "p": "com.github.jazzschmidt.apubsub.interceptor",
+    "c": "ConnectionEventPublisher",
+    "l": "ConnectionEventPublisher(ApplicationEventPublisher)",
+    "u": "%3Cinit%3E(org.springframework.context.ApplicationEventPublisher)"
 }, {
     "p": "com.github.jazzschmidt.apubsub.config",
     "c": "MessagingConfiguration",
@@ -53,8 +88,16 @@ memberSearchIndex = [{
     "c": "MessagingConfiguration",
     "l": "getBroadcastTopic()"
 }, {
+    "p": "com.github.jazzschmidt.apubsub.events",
+    "c": "ClientRegisteredEvent",
+    "l": "getClientName()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.events",
+    "c": "ClientUnregisteredEvent",
+    "l": "getClientName()"
+}, {
     "p": "com.github.jazzschmidt.apubsub",
-    "c": "ClientRegistrationService",
+    "c": "ClientRegistrations",
     "l": "getClientName(String)",
     "u": "getClientName(java.lang.String)"
 }, {
@@ -63,7 +106,7 @@ memberSearchIndex = [{
     "l": "getDisconnectDelay()"
 }, {
     "p": "com.github.jazzschmidt.apubsub",
-    "c": "NoSuchClientException",
+    "c": "UnregisteredClientException",
     "l": "getMessage()"
 }, {
     "p": "com.github.jazzschmidt.apubsub.config",
@@ -74,8 +117,12 @@ memberSearchIndex = [{
     "c": "MessagingConfiguration",
     "l": "getRegistrationTopic()"
 }, {
+    "p": "com.github.jazzschmidt.apubsub.events",
+    "c": "StompClientEvent",
+    "l": "getSessionId()"
+}, {
     "p": "com.github.jazzschmidt.apubsub",
-    "c": "NoSuchClientException",
+    "c": "UnregisteredClientException",
     "l": "getSessionId()"
 }, {
     "p": "com.github.jazzschmidt.apubsub.config",
@@ -95,14 +142,9 @@ memberSearchIndex = [{
     "l": "getType()"
 }, {
     "p": "com.github.jazzschmidt.apubsub",
-    "c": "ClientRegistrationService",
+    "c": "ClientRegistrations",
     "l": "isClientRegistered(String)",
     "u": "isClientRegistered(java.lang.String)"
-}, {
-    "p": "com.github.jazzschmidt.apubsub",
-    "c": "LoggingChannelInterceptor",
-    "l": "LoggingChannelInterceptor()",
-    "u": "%3Cinit%3E()"
 }, {
     "p": "com.github.jazzschmidt.apubsub",
     "c": "ServerApplication",
@@ -119,18 +161,13 @@ memberSearchIndex = [{
 }, {
     "p": "com.github.jazzschmidt.apubsub",
     "c": "MessageController",
-    "l": "MessageController(ClientRegistrationService)",
-    "u": "%3Cinit%3E(com.github.jazzschmidt.apubsub.ClientRegistrationService)"
+    "l": "MessageController(ClientRegistrations)",
+    "u": "%3Cinit%3E(com.github.jazzschmidt.apubsub.ClientRegistrations)"
 }, {
     "p": "com.github.jazzschmidt.apubsub.config",
     "c": "MessagingConfiguration",
     "l": "MessagingConfiguration()",
     "u": "%3Cinit%3E()"
-}, {
-    "p": "com.github.jazzschmidt.apubsub",
-    "c": "NoSuchClientException",
-    "l": "NoSuchClientException(String)",
-    "u": "%3Cinit%3E(java.lang.String)"
 }, {
     "p": "com.github.jazzschmidt.apubsub.messages",
     "c": "Notification",
@@ -138,7 +175,22 @@ memberSearchIndex = [{
     "u": "%3Cinit%3E(java.lang.String)"
 }, {
     "p": "com.github.jazzschmidt.apubsub",
-    "c": "LoggingChannelInterceptor",
+    "c": "NotificationService",
+    "l": "NotificationService(SimpMessagingTemplate, MessagingConfiguration)",
+    "u": "%3Cinit%3E(org.springframework.messaging.simp.SimpMessagingTemplate,com.github.jazzschmidt.apubsub.config.MessagingConfiguration)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "ClientEventListener",
+    "l": "onApplicationEvent(StompClientEvent)",
+    "u": "onApplicationEvent(com.github.jazzschmidt.apubsub.events.StompClientEvent)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.interceptor",
+    "c": "ConnectionEventPublisher",
+    "l": "preSend(Message<?>, MessageChannel)",
+    "u": "preSend(org.springframework.messaging.Message,org.springframework.messaging.MessageChannel)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.interceptor",
+    "c": "UnregisteredClientsGuard",
     "l": "preSend(Message<?>, MessageChannel)",
     "u": "preSend(org.springframework.messaging.Message,org.springframework.messaging.MessageChannel)"
 }, {
@@ -148,7 +200,7 @@ memberSearchIndex = [{
     "u": "registerClient(org.springframework.messaging.Message)"
 }, {
     "p": "com.github.jazzschmidt.apubsub",
-    "c": "ClientRegistrationService",
+    "c": "ClientRegistrations",
     "l": "registerClient(String, String)",
     "u": "registerClient(java.lang.String,java.lang.String)"
 }, {
@@ -182,11 +234,6 @@ memberSearchIndex = [{
     "l": "setBroadcast(String)",
     "u": "setBroadcast(java.lang.String)"
 }, {
-    "p": "com.github.jazzschmidt.apubsub",
-    "c": "LoggingChannelInterceptor",
-    "l": "setClientRegistrations(ClientRegistrationService)",
-    "u": "setClientRegistrations(com.github.jazzschmidt.apubsub.ClientRegistrationService)"
-}, {
     "p": "com.github.jazzschmidt.apubsub.config",
     "c": "MessagingConfiguration",
     "l": "setDisconnectDelay(long)"
@@ -211,6 +258,11 @@ memberSearchIndex = [{
     "l": "setTopics(MessagingConfiguration.TopicConfiguration)",
     "u": "setTopics(com.github.jazzschmidt.apubsub.config.MessagingConfiguration.TopicConfiguration)"
 }, {
+    "p": "com.github.jazzschmidt.apubsub.events",
+    "c": "StompClientEvent",
+    "l": "StompClientEvent(Object, String)",
+    "u": "%3Cinit%3E(java.lang.Object,java.lang.String)"
+}, {
     "p": "com.github.jazzschmidt.apubsub.config",
     "c": "MessagingConfiguration.TopicConfiguration",
     "l": "TopicConfiguration()",
@@ -220,9 +272,24 @@ memberSearchIndex = [{
     "c": "MessagingConfiguration",
     "l": "toString()"
 }, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "ClientRegistrations",
+    "l": "unregisterClient(String)",
+    "u": "unregisterClient(java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "UnregisteredClientException",
+    "l": "UnregisteredClientException(String)",
+    "u": "%3Cinit%3E(java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.interceptor",
+    "c": "UnregisteredClientsGuard",
+    "l": "UnregisteredClientsGuard(ClientRegistrations)",
+    "u": "%3Cinit%3E(com.github.jazzschmidt.apubsub.ClientRegistrations)"
+}, {
     "p": "com.github.jazzschmidt.apubsub.config",
     "c": "WebSocketConfiguration",
-    "l": "WebSocketConfiguration(ChannelInterceptor, MessagingConfiguration)",
-    "u": "%3Cinit%3E(org.springframework.messaging.support.ChannelInterceptor,com.github.jazzschmidt.apubsub.config.MessagingConfiguration)"
+    "l": "WebSocketConfiguration(List<ChannelInterceptor>, MessagingConfiguration)",
+    "u": "%3Cinit%3E(java.util.List,com.github.jazzschmidt.apubsub.config.MessagingConfiguration)"
 }];
 updateSearchResults();

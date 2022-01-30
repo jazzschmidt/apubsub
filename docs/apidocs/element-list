@@ -1,3 +1,5 @@
 com.github.jazzschmidt.apubsub
 com.github.jazzschmidt.apubsub.config
+com.github.jazzschmidt.apubsub.events
+com.github.jazzschmidt.apubsub.interceptor
 com.github.jazzschmidt.apubsub.messages
