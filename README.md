@@ -14,13 +14,13 @@ to [Electron](https://www.electronjs.org/).
 
 The individual parts of this project are being built with different tools:
 
-- Maven Wrapper
-- Docker
-- npm
+- **Maven Wrapper**
+- **Docker**
+- **npm**
 
 There is a convenience bash script, that will perform all necessary build steps for you and will fail when an error
-occurs: `full-build`. When targeting ARM architecture, supply the `--arm` flag. Erroneous builds will emit a log file to
-dig into the problems.
+occurs: `full-build`. When targeting ARM architecture, supply the `--arm` flag. Erroneous builds will emit a log file
+fou you to dig into the problems.
 
 The output should look like this:
 
@@ -47,9 +47,13 @@ After starting the Docker image, the port `8080` should be exposed on the host. 
 out the connection parameters. Since the client is limited to one instance, you can use the server rendered client UI on
 its index page to connect an additional client.
 
+When using custom clients, you should upgrade the http protocol to the STOMP protocol using the STOMP handshake
+endpoint. Immediately register the client, to associate a specific name - otherwise `unregistered` will be shown for
+every sent broadcast message.
+
 **Default Endpoints:**
 
-- `/stomp`: STOMP handshake and WebSocket upgrade
+- `/stomp`: STOMP handshake and WebSocket upgrade; SockJS compatible
 - `/app/register`: registering the client
 - `/app/broadcast`: sending a broadcast message
 - `/topic/broadcast`:  subscription of broadcast messages
@@ -100,6 +104,11 @@ Now you can send messages to all connected clients.
 ## Caveats
 
 While the server can be configured in many aspects and even validates its properties, the client does not fully comply
-to those settings. In detail, modifying any endpoint prevents the client to connect.
+to those settings. More specific, modifying any endpoint prevents the client to connect.
+
+The client registration is not enforced, which leads to unregistered clients being shown as `unregistered` in the
+messages table.
 
 The client has no error handling at all, since this would exceed the scope of this experiment.
+
+Multiple instances of the client aren't supported, so you need to use the server rendered UI for multi-client scenarios.
