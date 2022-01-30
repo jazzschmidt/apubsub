@@ -26,6 +26,8 @@ class ClientRegistrationsSpec extends Specification {
         !initialRegistration
         isRegistered
 
+        registrations.getClientName(sessionId) == clientName
+
         and:
         1 * eventPublisher.publishEvent({ ClientRegisteredEvent event ->
             event.sessionId == sessionId
