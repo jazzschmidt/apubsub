@@ -1,13 +1,12 @@
-# Simple Publish-Subscriber System
+# apubsub | Simple Publish-Subscriber System
 
 [![CI](https://github.com/jazzschmidt/apubsub/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jazzschmidt/gradle-docker-plugin/actions/workflows/ci.yml)
 
 A very basic example of a pub-sub system, where a client can broadcast messages via a central server to all connected
 clients.
 
-The server is written as a simple _Spring Boot_ web app that simply exposes STOMP endpoints via WebSockets. Also, a
-rudimentary client can be accessed over http. This enables testing between multiple clients, since the client
-implementation is limited to run in one instance only.
+The server is written as a simple _Spring Boot_ web app that exposes STOMP endpoints via WebSockets. Also, a rudimentary
+client can be accessed over http.
 
 The client is built using [NW.js](https://nwjs.io/), which seems to be a more efficient alternative
 to [Electron](https://www.electronjs.org/).
@@ -22,7 +21,7 @@ The individual parts of this project are being built with different tools:
 
 There is a convenience bash script, that will perform all necessary build steps for you and will fail when an error
 occurs: `full-build`. When targeting ARM architecture, supply the `--arm` flag. Erroneous builds will emit a log file
-fou you to dig into the problems.
+for you to dig into the problems.
 
 The output should look like this:
 
