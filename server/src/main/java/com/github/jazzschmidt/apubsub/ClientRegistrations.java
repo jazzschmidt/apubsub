@@ -42,9 +42,9 @@ public class ClientRegistrations {
      * Disassociates a client name from a STOMP session id and announces the leave.
      *
      * @param stompSessionId STOMP session id
-     * @throws NoSuchClientException when no client name is associated with that session id
+     * @throws UnregisteredClientException when no client name is associated with that session id
      */
-    public void unregisterClient(String stompSessionId) throws NoSuchClientException {
+    public void unregisterClient(String stompSessionId) throws UnregisteredClientException {
         validateRegistration(stompSessionId);
 
         String clientName = clientIds.remove(stompSessionId);
@@ -68,14 +68,14 @@ public class ClientRegistrations {
      * @param stompSessionId STOMP session id
      * @return name of the client or `unregistered`
      */
-    public String getClientName(String stompSessionId) throws NoSuchClientException {
+    public String getClientName(String stompSessionId) throws UnregisteredClientException {
         validateRegistration(stompSessionId);
         return clientIds.get(stompSessionId);
     }
 
-    private void validateRegistration(String stompSessionId) throws NoSuchClientException {
+    private void validateRegistration(String stompSessionId) throws UnregisteredClientException {
         if (!isClientRegistered(stompSessionId)) {
-            throw new NoSuchClientException(stompSessionId);
+            throw new UnregisteredClientException(stompSessionId);
         }
     }
 }

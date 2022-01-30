@@ -64,7 +64,7 @@ public class ClientEventListener implements ApplicationListener<StompClientEvent
 
         try {
             clientRegistrations.unregisterClient(sessionId);
-        } catch (NoSuchClientException e) {
+        } catch (UnregisteredClientException e) {
             e.printStackTrace(); // Virtually impossible
         }
     }

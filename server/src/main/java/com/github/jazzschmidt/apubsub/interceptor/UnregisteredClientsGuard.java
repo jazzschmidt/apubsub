@@ -30,8 +30,7 @@ public class UnregisteredClientsGuard implements ChannelInterceptor {
         String sessionId = accessor.getSessionId();
 
         if (SUBSCRIBE == command && !clientRegistrations.isClientRegistered(sessionId)) {
-            // TODO: Custom exception
-            throw new MessagingException("Unregistered client!");
+            throw new MessagingException(message, new UnregisteredClientException(sessionId));
         }
 
         return message;

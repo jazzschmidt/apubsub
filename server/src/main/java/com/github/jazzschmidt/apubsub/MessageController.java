@@ -5,6 +5,7 @@ import com.github.jazzschmidt.apubsub.messages.Broadcast;
 import com.github.jazzschmidt.apubsub.messages.Registration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
@@ -26,30 +27,8 @@ public class MessageController {
     }
 
     /**
-     * Broadcasts a message to all connected clients.
-     *
-     * @param message The {@link Broadcast} message
-     * @return the same message enriched with the sending clients name
-     */
-    @MessageMapping("#{@messaging.topics.broadcast}")
-    public Broadcast broadcast(Message<Broadcast> message) {
-        String sessionId = getStompSessionId(message);
-        String clientId = null;
-        try {
-            clientId = registrations.getClientName(sessionId);
-        } catch (NoSuchClientException e) {
-            e.printStackTrace();
-        }
-
-        // Associate client name with the broadcast message
-        Broadcast broadcast = message.getPayload();
-        broadcast.clientName = clientId;
-
-        return broadcast;
-    }
-
-    /**
-     * Registers a client in order to associate messages from a specific client.
+     * Registers a client in order to associate messages from a specific client. This step is required before
+     * subscribing to the broadcast topic.
      *
      * @param message the {@link Registration} message
      */
@@ -57,6 +36,29 @@ public class MessageController {
     public void registerClient(Message<Registration> message) {
         String clientName = message.getPayload().clientName;
         registrations.registerClient(getStompSessionId(message), clientName);
+    }
+
+    /**
+     * Broadcasts a message to all connected clients.
+     *
+     * @param message The {@link Broadcast} message
+     * @return the same message enriched with the sending clients name
+     */
+    @MessageMapping("#{@messaging.topics.broadcast}")
+    public Broadcast broadcast(Message<Broadcast> message) {
+        try {
+            setSendingClientName(message);
+            return message.getPayload();
+        } catch (UnregisteredClientException e) {
+            throw new MessagingException(message, e);
+        }
+    }
+
+    private void setSendingClientName(Message<Broadcast> message) throws UnregisteredClientException {
+        String sessionId = getStompSessionId(message);
+        String clientName = registrations.getClientName(sessionId);
+
+        message.getPayload().clientName = clientName;
     }
 
     private String getStompSessionId(Message<?> message) {

@@ -3,11 +3,11 @@ package com.github.jazzschmidt.apubsub;
 /**
  * Indicates that no client name is associated with the given STOMP session id
  */
-public class NoSuchClientException extends Exception {
+public class UnregisteredClientException extends Exception {
 
     private final String sessionId;
 
-    public NoSuchClientException(String sessionId) {
+    public UnregisteredClientException(String sessionId) {
         this.sessionId = sessionId;
     }
 
