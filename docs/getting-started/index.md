@@ -9,8 +9,10 @@ The individual parts of this project are being built with different tools:
 - **npm**
 
 There is a convenience bash script, that will perform all necessary build steps for you and will fail when an error
-occurs: `full-build`. When targeting ARM architecture, supply the `--arm` flag. Erroneous builds will emit a log file
-for you to dig into the problems.
+occurs: `full-build`. Consult this script if you like to retrace. When targeting ARM architecture, supply the `--arm`
+flag.
+
+?> Erroneous builds will immediately stop and emit a log file for you to dig into the problems
 
 The output should look like this:
 
@@ -33,16 +35,16 @@ Client bin (linux) | client/dist/apubsub-client/linux64/apubsub-client
 
 ## Usage
 
-After starting the Docker image, the port `8080` should be exposed on the host. Start the client application and fill
-out the connection parameters. Since the client is limited to one instance, you can use the server rendered client UI on
-its index page to connect an additional client.
+After starting the Docker image, Springs default http port `8080` should be exposed on the host. Start the client
+application and fill out the connection parameters.
 
-When using custom clients, you should immediately register the client, to associate a specific name -
-otherwise `unregistered` will be shown for every sent broadcast message.
+!> When using custom clients, you should immediately register the client to associate a specific name - otherwise your
+client will be rejected when trying to subsribe to the broadcast topic.
 
 **Default Endpoints:**
 
-- `/stomp`: STOMP handshake and WebSocket upgrade; SockJS compatible
+- `/`: Web client for testing
+- `/stomp`: STOMP endpoint; SockJS compatible
 - `/app/register`: registering the client
 - `/app/broadcast`: sending a broadcast message
 - `/topic/broadcast`:  subscription of broadcast messages
@@ -89,4 +91,8 @@ Enter the STOMP endpoint and connect:
 
 Now you can send messages to all connected clients.
 
+?> The client application is limited to run in a single instance. You can easily bypass this issue for testing by using
+the Web UI, that is exposed on the server.
+
 ![Sending Messages](https://raw.githubusercontent.com/jazzschmidt/apubsub/main/assets/client-chat.png)
+
