@@ -112,3 +112,6 @@ messages table.
 The client has no error handling at all, since this would exceed the scope of this experiment.
 
 Multiple instances of the client aren't supported, so you need to use the server rendered UI for multi-client scenarios.
+
+The server rendered client UI has a fixed name: `server-ui`. Using multiple windows or tabs of that UI will work, but
+messages cannot be specifically distinguished.
