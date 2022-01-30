@@ -1,0 +1,228 @@
+memberSearchIndex = [{
+    "p": "com.github.jazzschmidt.apubsub.messages",
+    "c": "Broadcast",
+    "l": "Broadcast()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "MessageController",
+    "l": "broadcast(Message<Broadcast>)",
+    "u": "broadcast(org.springframework.messaging.Message)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.messages",
+    "c": "Broadcast",
+    "l": "clientName"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.messages",
+    "c": "Registration",
+    "l": "clientName"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "ClientRegistrationService",
+    "l": "ClientRegistrationService(SimpMessagingTemplate, MessagingConfiguration)",
+    "u": "%3Cinit%3E(org.springframework.messaging.simp.SimpMessagingTemplate,com.github.jazzschmidt.apubsub.config.MessagingConfiguration)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "WebSocketConfiguration",
+    "l": "configureClientInboundChannel(ChannelRegistration)",
+    "u": "configureClientInboundChannel(org.springframework.messaging.simp.config.ChannelRegistration)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "WebSocketConfiguration",
+    "l": "configureMessageBroker(MessageBrokerRegistry)",
+    "u": "configureMessageBroker(org.springframework.messaging.simp.config.MessageBrokerRegistry)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "ClientRegistrationService",
+    "l": "dropClient(String)",
+    "u": "dropClient(java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "getAllowedOriginPatterns()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "getAppPrefix()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration.TopicConfiguration",
+    "l": "getBroadcast()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "getBroadcastTopic()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "ClientRegistrationService",
+    "l": "getClientName(String)",
+    "u": "getClientName(java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "getDisconnectDelay()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "NoSuchClientException",
+    "l": "getMessage()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration.TopicConfiguration",
+    "l": "getRegistration()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "getRegistrationTopic()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "NoSuchClientException",
+    "l": "getSessionId()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "getStompEndpoint()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "getTopicPrefix()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "getTopics()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.messages",
+    "c": "StereotypeMessage",
+    "l": "getType()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "ClientRegistrationService",
+    "l": "isClientRegistered(String)",
+    "u": "isClientRegistered(java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "LoggingChannelInterceptor",
+    "l": "LoggingChannelInterceptor()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "ServerApplication",
+    "l": "main(String[])",
+    "u": "main(java.lang.String[])"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.messages",
+    "c": "Broadcast",
+    "l": "message"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.messages",
+    "c": "Notification",
+    "l": "message"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "MessageController",
+    "l": "MessageController(ClientRegistrationService)",
+    "u": "%3Cinit%3E(com.github.jazzschmidt.apubsub.ClientRegistrationService)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "MessagingConfiguration()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "NoSuchClientException",
+    "l": "NoSuchClientException(String)",
+    "u": "%3Cinit%3E(java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.messages",
+    "c": "Notification",
+    "l": "Notification(String)",
+    "u": "%3Cinit%3E(java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "LoggingChannelInterceptor",
+    "l": "preSend(Message<?>, MessageChannel)",
+    "u": "preSend(org.springframework.messaging.Message,org.springframework.messaging.MessageChannel)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "MessageController",
+    "l": "registerClient(Message<Registration>)",
+    "u": "registerClient(org.springframework.messaging.Message)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "ClientRegistrationService",
+    "l": "registerClient(String, String)",
+    "u": "registerClient(java.lang.String,java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "WebSocketConfiguration",
+    "l": "registerStompEndpoints(StompEndpointRegistry)",
+    "u": "registerStompEndpoints(org.springframework.web.socket.config.annotation.StompEndpointRegistry)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.messages",
+    "c": "Registration",
+    "l": "Registration()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "ServerApplication",
+    "l": "ServerApplication()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "setAllowedOriginPatterns(List<String>)",
+    "u": "setAllowedOriginPatterns(java.util.List)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "setAppPrefix(String)",
+    "u": "setAppPrefix(java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration.TopicConfiguration",
+    "l": "setBroadcast(String)",
+    "u": "setBroadcast(java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub",
+    "c": "LoggingChannelInterceptor",
+    "l": "setClientRegistrations(ClientRegistrationService)",
+    "u": "setClientRegistrations(com.github.jazzschmidt.apubsub.ClientRegistrationService)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "setDisconnectDelay(long)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration.TopicConfiguration",
+    "l": "setRegistration(String)",
+    "u": "setRegistration(java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "setStompEndpoint(String)",
+    "u": "setStompEndpoint(java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "setTopicPrefix(String)",
+    "u": "setTopicPrefix(java.lang.String)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "setTopics(MessagingConfiguration.TopicConfiguration)",
+    "u": "setTopics(com.github.jazzschmidt.apubsub.config.MessagingConfiguration.TopicConfiguration)"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration.TopicConfiguration",
+    "l": "TopicConfiguration()",
+    "u": "%3Cinit%3E()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "MessagingConfiguration",
+    "l": "toString()"
+}, {
+    "p": "com.github.jazzschmidt.apubsub.config",
+    "c": "WebSocketConfiguration",
+    "l": "WebSocketConfiguration(ChannelInterceptor, MessagingConfiguration)",
+    "u": "%3Cinit%3E(org.springframework.messaging.support.ChannelInterceptor,com.github.jazzschmidt.apubsub.config.MessagingConfiguration)"
+}];
+updateSearchResults();
