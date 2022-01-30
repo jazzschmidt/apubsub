@@ -10,6 +10,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -19,21 +20,22 @@ import java.util.logging.Logger;
 @EnableWebSocketMessageBroker
 public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer {
 
-    private final ChannelInterceptor loggingChannelInterceptor;
+    private final List<ChannelInterceptor> interceptors;
     private final MessagingConfiguration messagingConfiguration;
 
     private final Logger log;
 
+    {
+        log = Logger.getLogger(getClass().getName());
+    }
+
     @Autowired
-    public WebSocketConfiguration(ChannelInterceptor loggingChannelInterceptor, MessagingConfiguration configuration) {
-        this.loggingChannelInterceptor = loggingChannelInterceptor;
+    public WebSocketConfiguration(List<ChannelInterceptor> interceptors, MessagingConfiguration configuration) {
+        this.interceptors = interceptors;
         this.messagingConfiguration = configuration;
 
-        {
-            // Partially output the messaging configuration
-            log = Logger.getLogger(getClass().getName());
-            log.info("Initialized messaging with the following properties: \n" + messagingConfiguration.toString());
-        }
+        // Partially output the messaging configuration
+        log.info("Initialized messaging with the following properties: \n" + messagingConfiguration.toString());
     }
 
     @Override
@@ -52,8 +54,8 @@ public class WebSocketConfiguration implements WebSocketMessageBrokerConfigurer 
 
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
-        // Logs new connects and disconnects to stdout
-        registration.interceptors(loggingChannelInterceptor);
+        // https://stackoverflow.com/a/9863752/1087447
+        registration.interceptors(interceptors.toArray(new ChannelInterceptor[0]));
     }
 
 }

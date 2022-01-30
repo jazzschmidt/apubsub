@@ -22,10 +22,13 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/messages', function (greeting) {
-            showMessage(JSON.parse(greeting.body));
-        });
         register();
+        setTimeout(function () {
+            // Suppose registration is complete after 200ms
+            stompClient.subscribe('/topic/messages', function (greeting) {
+                showMessage(JSON.parse(greeting.body));
+            });
+        }, 200)
     });
 }
 

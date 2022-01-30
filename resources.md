@@ -6,6 +6,7 @@ The following resources were consulted:
 - [Core Features (docs.spring.io)](https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.external-config)
 - [STOMP Support (docs.spring.io)](https://docs.spring.io/spring-integration/reference/html/stomp.html)
 - [Web on Servlet Stack (docs.spring.io)](https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#websocket-stomp-client)
+- [Spring Events | Baeldung (baeldung.com)](https://www.baeldung.com/spring-events)
 - [nws/nw.js (github.com)](https://github.com/nwjs/nw.js)
 - [NW.js (nwjs.io)](https://nwjs.io/)
 - [NW.js Documentation (docs.nwjs.io)](https://docs.nwjs.io/en/latest/)
