@@ -1,6 +1,6 @@
 package com.github.jazzschmidt.apubsub.interceptor;
 
-import com.github.jazzschmidt.apubsub.ClientRegistrationService;
+import com.github.jazzschmidt.apubsub.ClientRegistrations;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessagingException;
@@ -12,9 +12,9 @@ import static org.springframework.messaging.simp.stomp.StompCommand.SUBSCRIBE;
 
 public class UnregisteredClientsGuard implements ChannelInterceptor {
 
-    private final ClientRegistrationService clientRegistrations;
+    private final ClientRegistrations clientRegistrations;
 
-    public UnregisteredClientsGuard(ClientRegistrationService clientRegistrations) {
+    public UnregisteredClientsGuard(ClientRegistrations clientRegistrations) {
         this.clientRegistrations = clientRegistrations;
     }
 

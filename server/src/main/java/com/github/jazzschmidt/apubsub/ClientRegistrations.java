@@ -1,10 +1,10 @@
 package com.github.jazzschmidt.apubsub;
 
-import com.github.jazzschmidt.apubsub.config.MessagingConfiguration;
-import com.github.jazzschmidt.apubsub.messages.Notification;
+import com.github.jazzschmidt.apubsub.events.ClientRegisteredEvent;
+import com.github.jazzschmidt.apubsub.events.ClientUnregisteredEvent;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.stereotype.Service;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,25 +13,18 @@ import java.util.Map;
  * Associates client names with their STOMP session id and announces new connections and disconnects via the standard
  * messaging topic.
  */
-@Service
-public class ClientRegistrationService {
-
-    private static final String UNREGISTERED_CLIENT = "unregistered";
-    private static final String MESSAGE_REGISTER = "Client %s has entered the chat";
-    private static final String MESSAGE_DROP = "Client %s has left the chat";
+@Component
+public class ClientRegistrations {
 
     /**
      * Associations of session ids and their respective client names
      */
     private final Map<String, String> clientIds = new HashMap<>();
-
-    private final SimpMessagingTemplate messagingTemplate;
-    private final MessagingConfiguration configuration;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Autowired
-    public ClientRegistrationService(SimpMessagingTemplate messagingTemplate, MessagingConfiguration configuration) {
-        this.messagingTemplate = messagingTemplate;
-        this.configuration = configuration;
+    public ClientRegistrations(ApplicationEventPublisher eventPublisher) {
+        this.eventPublisher = eventPublisher;
     }
 
     /**
@@ -42,7 +35,7 @@ public class ClientRegistrationService {
      */
     public void registerClient(String stompSessionId, String clientName) {
         clientIds.put(stompSessionId, clientName);
-        broadcastNotification(String.format(MESSAGE_REGISTER, clientName));
+        eventPublisher.publishEvent(new ClientRegisteredEvent(this, stompSessionId, clientName));
     }
 
     /**
@@ -51,25 +44,11 @@ public class ClientRegistrationService {
      * @param stompSessionId STOMP session id
      * @throws NoSuchClientException when no client name is associated with that session id
      */
-    public void dropClient(String stompSessionId) throws NoSuchClientException {
-        if (!isClientRegistered(stompSessionId)) {
-            throw new NoSuchClientException(stompSessionId);
-        }
+    public void unregisterClient(String stompSessionId) throws NoSuchClientException {
+        validateRegistration(stompSessionId);
 
         String clientName = clientIds.remove(stompSessionId);
-        broadcastNotification(String.format(MESSAGE_DROP, clientName));
-    }
-
-    /**
-     * Broadcasts a {@link Notification} message.
-     *
-     * @param message informational message
-     */
-    private void broadcastNotification(String message) {
-        String topic = configuration.getBroadcastTopic();
-        Notification notification = new Notification(message);
-
-        messagingTemplate.convertAndSend(topic, notification);
+        eventPublisher.publishEvent(new ClientUnregisteredEvent(this, stompSessionId, clientName));
     }
 
     /**
@@ -89,7 +68,14 @@ public class ClientRegistrationService {
      * @param stompSessionId STOMP session id
      * @return name of the client or `unregistered`
      */
-    public String getClientName(String stompSessionId) {
-        return clientIds.getOrDefault(stompSessionId, UNREGISTERED_CLIENT);
+    public String getClientName(String stompSessionId) throws NoSuchClientException {
+        validateRegistration(stompSessionId);
+        return clientIds.get(stompSessionId);
+    }
+
+    private void validateRegistration(String stompSessionId) throws NoSuchClientException {
+        if (!isClientRegistered(stompSessionId)) {
+            throw new NoSuchClientException(stompSessionId);
+        }
     }
 }

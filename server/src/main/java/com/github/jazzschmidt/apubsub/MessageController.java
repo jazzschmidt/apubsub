@@ -18,10 +18,10 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class MessageController {
 
-    private final ClientRegistrationService registrations;
+    private final ClientRegistrations registrations;
 
     @Autowired
-    public MessageController(ClientRegistrationService registrations) {
+    public MessageController(ClientRegistrations registrations) {
         this.registrations = registrations;
     }
 
@@ -34,7 +34,12 @@ public class MessageController {
     @MessageMapping("#{@messaging.topics.broadcast}")
     public Broadcast broadcast(Message<Broadcast> message) {
         String sessionId = getStompSessionId(message);
-        String clientId = registrations.getClientName(sessionId);
+        String clientId = null;
+        try {
+            clientId = registrations.getClientName(sessionId);
+        } catch (NoSuchClientException e) {
+            e.printStackTrace();
+        }
 
         // Associate client name with the broadcast message
         Broadcast broadcast = message.getPayload();

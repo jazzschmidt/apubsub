@@ -1,6 +1,6 @@
 package com.github.jazzschmidt.apubsub.interceptor;
 
-import com.github.jazzschmidt.apubsub.ClientRegistrationService;
+import com.github.jazzschmidt.apubsub.ClientRegistrations;
 import com.github.jazzschmidt.apubsub.events.ClientConnectedEvent;
 import com.github.jazzschmidt.apubsub.events.ClientDisconnectedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,8 @@ import static org.springframework.messaging.simp.stomp.StompCommand.CONNECT;
 import static org.springframework.messaging.simp.stomp.StompCommand.DISCONNECT;
 
 /**
- * Logs connecting and disconnecting messages and drops clients from the {@link ClientRegistrationService} when a
- * disconnect occurs.
+ * Logs connecting and disconnecting messages and drops clients from the {@link ClientRegistrations} when a disconnect
+ * occurs.
  */
 @Component
 public class ConnectionEventPublisher implements ExecutorChannelInterceptor {

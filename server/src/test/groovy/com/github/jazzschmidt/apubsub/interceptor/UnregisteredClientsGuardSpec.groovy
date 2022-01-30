@@ -1,8 +1,8 @@
 package com.github.jazzschmidt.apubsub.interceptor
 
-import com.github.jazzschmidt.apubsub.ClientRegistrationService
+
+import com.github.jazzschmidt.apubsub.ClientRegistrations
 import com.github.jazzschmidt.apubsub.extra.MessageBuilder
-import com.github.jazzschmidt.apubsub.interceptor.UnregisteredClientsGuard
 import org.springframework.messaging.Message
 import org.springframework.messaging.MessageChannel
 import org.springframework.messaging.MessagingException
@@ -16,7 +16,7 @@ class UnregisteredClientsGuardSpec extends Specification {
         def sessionId = 'abc123'
         Message<?> subscribe = MessageBuilder.subscribe(sessionId)
 
-        ClientRegistrationService registrationService = Mock()
+        ClientRegistrations registrationService = Mock()
         ChannelInterceptor interceptor = new UnregisteredClientsGuard(registrationService)
 
         when:
@@ -32,7 +32,7 @@ class UnregisteredClientsGuardSpec extends Specification {
         def sessionId = 'abc123'
         Message<?> subscribe = MessageBuilder.subscribe(sessionId)
 
-        ClientRegistrationService registrationService = Mock()
+        ClientRegistrations registrationService = Mock()
         ChannelInterceptor interceptor = new UnregisteredClientsGuard(registrationService)
 
         when:
