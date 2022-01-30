@@ -10,3 +10,21 @@ client can be accessed over http.
 
 The client is built using [NW.js](https://nwjs.io/), which seems to be a more efficient alternative
 to [Electron](https://www.electronjs.org/).
+
+## Tech Stack
+
+- Spring Boot 2.6.3
+- Java 17
+- Maven
+- NW.js
+- npm
+- Docker
+- Docsify :heart:
+
+## Features
+
+- Centralized real time broadcasting chat server
+- Registration workflow for subscription of topics
+- Over 90% test coverage of the server module
+- Simple event-driven application
+- Cross-os compatible client app
