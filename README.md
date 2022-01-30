@@ -24,7 +24,7 @@ fou you to dig into the problems.
 
 The output should look like this:
 
-```
+```bash
 $ ./full-build --arm # omit parameter for x64 architectures
 Building Server module... done!
 Building Docker image... done!
