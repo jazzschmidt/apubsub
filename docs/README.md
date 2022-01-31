@@ -6,10 +6,10 @@ A very basic example of a pub-sub system, where a client can broadcast messages 
 clients.
 
 The server is written as a simple [Spring Boot](https://spring.io/projects/spring-boot) web app that
-exposes [STOMP](https://stomp.github.io/) endpoints via WebSockets. Also, a rudimentary client can be accessed over
-http.
+exposes [SockJS](https://github.com/sockjs/sockjs-client) compatible [STOMP](https://stomp.github.io/) endpoints through
+WebSockets. Also, a rudimentary client can be accessed over http.
 
-The client is built using [NW.js](https://nwjs.io/), which seems to be a more efficient alternative
+The client application is built using [NW.js](https://nwjs.io/), which seems to be a more efficient alternative
 to [Electron](https://www.electronjs.org/).
 
 ## Features
