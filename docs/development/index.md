@@ -65,11 +65,10 @@ There are quite a lot more features that simplify testing - if used with caution
 
 ### Lombok
 
-_Lombok_ manipulates source code, has some error-prone incompatibilities with IntelliJ (e.g. when referencing compiled
-sources in a debug session where source files are not correctly mapped - which is not a thing you want to do while
-debugging), and needlessly litter the build to simulate language features that are simply not present in current Java
-versions. Therefore, the use of Lombok was discouraged in favour of using the capabilities of IntelliJ - namely
-generating
+_Lombok_ manipulates source code, has some error-prone behaviour with IntelliJ (e.g. when referencing compiled sources
+in a debug session where source files are not correctly mapped - which is not a thing you want to do while debugging),
+and needlessly litter the build to simulate language features that are simply not present in current Java versions.
+Therefore, the use of Lombok was discouraged in favour of using the capabilities of IntelliJ - namely generating
 _Getters_ and _Setters_. Since _Groovy_ and _Kotlin_, and possibly _Scala_ too, provide these features per se and mixing
 these languages with Java is no hassle at all, there was no need to use Lombok, even if the models are getting any more
 complex.
