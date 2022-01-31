@@ -1,6 +1,6 @@
 # apubsub | Simple Publish-Subscriber System
 
-[![CI](https://github.com/jazzschmidt/apubsub/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jazzschmidt/gradle-docker-plugin/actions/workflows/ci.yml)
+[![CI](https://github.com/jazzschmidt/apubsub/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/jazzschmidt/apubsub/actions/workflows/ci.yml)
 
 A very basic example of a pub-sub system, where a client can broadcast messages via a central server to all connected
 clients.
