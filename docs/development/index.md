@@ -56,8 +56,8 @@ _Groovy_ comes in handy, especially when dealing with tests because of its flexi
 features, a coherent API - and is fun to use!
 
 Also, in Groovy you can access `protected` and  `private` members, which only leads to a compiler warning and IntelliJ
-refusing to autocomplete those specific statement. This can drastically improve testability in unit tests, although this
-feature was not used in this project.
+refusing to autocomplete those specific statements. This can drastically improve testability in unit tests, although
+this feature was not used in this project.
 
 There are quite a lot more features that simplify testing - if used with caution.
 
@@ -68,10 +68,10 @@ There are quite a lot more features that simplify testing - if used with caution
 _Lombok_ manipulates source code, has some error-prone behaviour with IntelliJ (e.g. when referencing compiled sources
 in a debug session where source files are not correctly mapped - which is not a thing you want to do while debugging),
 and needlessly litter the build to simulate language features that are simply not present in current Java versions.
-Therefore, the use of Lombok was discouraged in favour of using the capabilities of IntelliJ - namely generating
-_Getters_ and _Setters_. Since _Groovy_ and _Kotlin_, and possibly _Scala_ too, provide these features per se and mixing
-these languages with Java is no hassle at all, there was no need to use Lombok, even if the models are getting any more
-complex.
+Therefore, the use of Lombok was discouraged in favour of using the capabilities of IntelliJ - specifically the
+automatic generation of _Getters_ and _Setters_. Since _Groovy_ and _Kotlin_, and possibly _Scala_ too, provide these
+features per se and mixing these languages with Java is no hassle at all, there was no need to use Lombok, even if the
+models are getting any more complex.
 
 ### Maven
 
