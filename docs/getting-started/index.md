@@ -1,5 +1,8 @@
 # Getting Started
 
+You can either [download the latest release](https://github.com/jazzschmidt/apubsub/releases/latest) from GitHub or
+build the modules on your own.
+
 ## Build
 
 The individual parts of this project are being built with different tools:
@@ -39,7 +42,7 @@ After starting the Docker image, Springs default http port `8080` should be expo
 application and fill out the connection parameters.
 
 !> When using custom clients, you should immediately register the client to associate a specific name - otherwise your
-client will be rejected when trying to subsribe to the broadcast topic.
+client will be rejected when trying to subscribe to the broadcast topic.
 
 **Default Endpoints:**
 

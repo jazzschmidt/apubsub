@@ -51,7 +51,7 @@ Therefore, the client was simply transferred with little effort and there was no
 
 ## Spock Testing Framework
 
-_Groovy_ comes in handy, especially when dealing with tests because of both its flexibility and simplicity. The
+_Groovy_ comes in handy, especially when dealing with tests because of its flexibility and simplicity. The
 [Spock Framework](https://spockframework.org/) comes with superior Spring support, integrated stubbing and mocking
 features, a coherent API - and is fun to use!
 
