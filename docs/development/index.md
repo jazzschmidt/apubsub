@@ -16,8 +16,8 @@ This diagram shows the simplified process:
 In order to decouple the components of the system, an event-driven architecture was chosen. Thereby a central Event
 Listener, namely the [ClientEventListener](/apubsub/apidocs/com/github/jazzschmidt/apubsub/ClientEventListener.html),
 consumes
-[StompClientEvents](/apubsub/apidocs/com/github/jazzschmidt/apubsub/events/StompClientEvent.html) of interest and
-publishes an event, when a client connects, disconnects or registers itself.
+[StompClientEvents](/apubsub/apidocs/com/github/jazzschmidt/apubsub/events/StompClientEvent.html) of interest and comes
+into action, when a client connects, disconnects or registers itself.
 
 The [ClientEventListener](/apubsub/apidocs/com/github/jazzschmidt/apubsub/ClientEventListener.html) then instructs the
 [NotificationService](/apubsub/apidocs/com/github/jazzschmidt/apubsub/NotificationService.html) for example to announce
